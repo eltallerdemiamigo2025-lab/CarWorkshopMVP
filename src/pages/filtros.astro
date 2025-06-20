@@ -1,0 +1,578 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
+import heroImageAceites from '../assets/heroaceites.jpg'; // Asegúrate de tener esta imagen
+import Button from '../components/ui/Button.astro';
+
+// --- DATOS CENTRALIZADOS PARA LA PÁGINA DE ACEITES --- (ES PAGINA DE ACEITES, NO FILTROS)
+
+const WHATSAPP_NUMBER = "34000000000"; // Tu número de WhatsApp
+
+// Actualizamos los datos de la prueba social
+const socialProofData = {
+    rating: 4.6,
+    reviewCount: 1000
+};
+
+// DATOS COMPLETOS DE LAS MARCAS DE ACEITES
+// Asegúrate de que el valor de 'logo' es idéntico al nombre de tu archivo en /src/assets/logos/
+const marcasPrincipales = [
+    { 
+        name: 'Castrol', 
+        logo: 'castrol.svg', 
+        description: 'Líder mundial en aceites sintéticos con tecnología Liquid Engineering. Disponible en todas las viscosidades: 0W-20, 5W-30, 5W-40 y más.' 
+    },
+    { 
+        name: 'Repsol', 
+        logo: 'repsol.svg', 
+        description: 'Tecnología española probada en competición. Aceites sintéticos y semisintéticos con homologaciones de fabricantes europeos.' 
+    },
+    { 
+        name: 'Total', 
+        logo: 'total.svg', 
+        description: 'Innovación francesa para máximo rendimiento. Aceites de alta calidad con tecnología avanzada para motores modernos y clásicos.' 
+    },
+    { 
+        name: 'Elf', 
+        logo: 'elf.svg', 
+        description: 'Experiencia de Fórmula 1 al alcance de tu motor. Aceites sintéticos de altas prestaciones con tecnología de competición.' 
+    },
+    { 
+        name: 'Selenia', 
+        logo: 'selenia.svg', 
+        description: 'Aceites Petronas desarrollados específicamente para vehículos Fiat y Stellantis. Formulaciones exclusivas para motores modernos.' 
+    }
+];
+---
+
+<Layout
+    title="Aceites de Motor a Domicilio - Cambio Profesional | El Taller de mi Amigo"
+    description="Cambio de aceite de motor con recogida y entrega gratuita en Madrid. Castrol, Repsol, Total, Elf y Selenia. Todas las viscosidades disponibles."
+>
+    <Hero
+        title="Tu aceite nuevo, <span>cambiado donde tú prefieras</span>"
+        subtitle="¿Necesitas cambiar el aceite? Elige tu marca de confianza y nosotros nos encargamos de todo: recogida, cambio profesional con filtro incluido y entrega donde nos digas."
+        image={heroImageAceites}
+        imageAlt="Aceite de motor siendo cambiado por mecánico profesional en taller"
+        socialProof={socialProofData}
+    />
+
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title">Nuestras Marcas de Aceites</h2>
+            <p class="section-subtitle">Selecciona tu marca de confianza y contacta directamente por WhatsApp. Te asesoramos con la viscosidad perfecta para tu motor.</p>
+            <SelectorMarcas
+                marcasPrincipales={marcasPrincipales}
+                whatsappNumber={WHATSAPP_NUMBER}
+            />
+        </div>
+    </section>
+
+    <section class="page-section viscosity-section">
+        <div class="container">
+            <h2 class="section-title">¿Qué Viscosidad Necesitas?</h2>
+            <div class="viscosity-grid">
+                <div class="viscosity-card">
+                    <div class="viscosity-icon">
+                        <i class='bx bx-thermometer'></i>
+                    </div>
+                    <h3>0W-20 / 0W-30</h3>
+                    <p>Para motores modernos que requieren máxima eficiencia energética. Ideal para climas fríos y motores híbridos.</p>
+                    <span class="viscosity-label efficiency">Máxima Eficiencia</span>
+                </div>
+                <div class="viscosity-card">
+                    <div class="viscosity-icon">
+                        <i class='bx bx-car'></i>
+                    </div>
+                    <h3>5W-30 / 5W-40</h3>
+                    <p>Las viscosidades más populares. Perfectas para la mayoría de motores gasolina y diésel. Excelente protección todo el año.</p>
+                    <span class="viscosity-label popular">Más Popular</span>
+                </div>
+                <div class="viscosity-card">
+                    <div class="viscosity-icon">
+                        <i class='bx bx-cog'></i>
+                    </div>
+                    <h3>10W-40 / 15W-40</h3>
+                    <p>Para motores con más kilometraje o climas cálidos. Proporcionan mayor protección a altas temperaturas.</p>
+                    <span class="viscosity-label protection">Alto Kilometraje</span>
+                </div>
+                <div class="viscosity-card">
+                    <div class="viscosity-icon">
+                        <i class='bx bx-shield-alt-2'></i>
+                    </div>
+                    <h3>20W-50</h3>
+                    <p>Para motores veteranos o de alta exigencia. Máxima protección contra el desgaste en condiciones extremas.</p>
+                    <span class="viscosity-label classic">Motores Clásicos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section benefits-section">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-droplet'></i>
+                    </div>
+                    <h3>Cambio Completo</h3>
+                    <p>Incluimos filtro de aceite nuevo, limpieza del tapón de drenaje y verificación de niveles. Todo en una sola visita.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-test-tube'></i>
+                    </div>
+                    <h3>Asesoramiento Técnico</h3>
+                    <p>Nuestros mecánicos identifican la viscosidad exacta según tu motor, kilometraje y estilo de conducción.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-recycle'></i>
+                    </div>
+                    <h3>Gestión Ecológica</h3>
+                    <p>Recogemos el aceite usado para su reciclaje responsable. Cumplimos con toda la normativa medioambiental.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-time'></i>
+                    </div>
+                    <h3>Intervalos Personalizados</h3>
+                    <p>Te recordamos cuándo toca el próximo cambio según tus kilómetros y tipo de aceite utilizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section clarity-block">
+        <div class="container">
+            <div class="clarity-content">
+                <div class="clarity-icon"><i class='bx bx-help-circle'></i></div>
+                <h3>¿No sabes qué aceite necesita tu motor?</h3>
+                <p>
+                    ¡Perfecto! Es nuestro trabajo conocer las especificaciones exactas. Con tu matrícula identificamos 
+                    el aceite correcto: marca, viscosidad y cantidad. También consideramos el kilometraje y uso del vehículo.
+                </p>
+                <div class="service-highlight">
+                    <i class='bx bx-star'></i>
+                    <span><strong>Servicio Premium:</strong> Con cada cambio de aceite, revisamos niveles de frenos, dirección asistida y refrigerante. ¡Sin coste adicional!</span>
+                </div>
+                <div class="clarity-actions">
+                    <Button href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20cambiar%20el%20aceite%20de%20mi%20coche.%20¿Podrían%20asesorarme%20sobre%20qué%20aceite%20necesito?`} target="_blank">
+                        Consulta por WhatsApp
+                    </Button>
+                    <Button href={`tel:${WHATSAPP_NUMBER}`} variant="secondary">
+                        Llamar Ahora
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Icono Flotante de WhatsApp -->
+    <div class="whatsapp-float">
+        <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20información%20sobre%20cambio%20de%20aceite%20de%20motor`} target="_blank" rel="noopener" class="whatsapp-button">
+            <i class='bx bxl-whatsapp'></i>
+            <span class="whatsapp-tooltip">¡Escríbenos por WhatsApp!</span>
+        </a>
+    </div>
+
+    <!-- Número de teléfono flotante -->
+    <div class="phone-float">
+        <a href={`tel:${WHATSAPP_NUMBER}`} class="phone-button">
+            <i class='bx bx-phone'></i>
+            <span class="phone-tooltip">Clic para llamar</span>
+        </a>
+    </div>
+</Layout>
+
+<style>
+    .page-section { 
+        padding: 5rem 0; 
+    }
+    
+    .viscosity-section {
+        background-color: var(--color-surface-base);
+    }
+    
+    .viscosity-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .viscosity-card {
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid var(--color-border);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .viscosity-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    }
+    
+    .viscosity-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+    
+    .viscosity-icon {
+        font-size: 3rem;
+        color: var(--color-primary);
+        margin-bottom: 1rem;
+    }
+    
+    .viscosity-card h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--color-text-base);
+    }
+    
+    .viscosity-card p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .viscosity-label {
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .viscosity-label.efficiency {
+        background: #d1fae5;
+        color: #065f46;
+    }
+    
+    .viscosity-label.popular {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+    
+    .viscosity-label.protection {
+        background: #fef3c7;
+        color: #92400e;
+    }
+    
+    .viscosity-label.classic {
+        background: #ede9fe;
+        color: #6b21a8;
+    }
+    
+    .benefits-section {
+        background-color: var(--color-surface-muted);
+    }
+    
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .benefit-card {
+        background: var(--color-surface-base);
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .benefit-icon {
+        font-size: 3rem;
+        color: var(--color-primary);
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--color-text-base);
+    }
+    
+    .benefit-card p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    .clarity-block { 
+        background-color: var(--color-surface-muted); 
+    }
+    
+    .clarity-content { 
+        max-width: 800px; 
+        margin: 0 auto; 
+        text-align: center; 
+        background-color: var(--color-surface-base); 
+        padding: 3rem; 
+        border-radius: 16px; 
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); 
+    }
+    
+    .clarity-icon { 
+        font-size: 3rem; 
+        color: var(--color-primary); 
+        margin-bottom: 1rem; 
+    }
+    
+    .clarity-content h3 { 
+        font-size: 2rem; 
+        margin-bottom: 1rem; 
+    }
+    
+    .clarity-content p { 
+        color: var(--color-text-muted); 
+        font-size: 1.1rem; 
+        line-height: 1.7; 
+        margin-bottom: 2rem; 
+    }
+    
+    .service-highlight {
+        background: #f0f9ff;
+        border: 1px solid #0ea5e9;
+        border-radius: 12px;
+        padding: 1.2rem;
+        margin: 1.5rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        color: #0c4a6e;
+        font-size: 0.95rem;
+    }
+    
+    .service-highlight i {
+        font-size: 1.3rem;
+        color: var(--color-primary);
+        flex-shrink: 0;
+    }
+    
+    .clarity-actions { 
+        display: flex; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+        gap: 1rem; 
+    }
+
+    /* Botón flotante de WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .whatsapp-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: #25D366;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.8rem;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .whatsapp-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+    
+    .whatsapp-tooltip {
+        position: absolute;
+        right: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .whatsapp-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .whatsapp-button:hover .whatsapp-tooltip {
+        opacity: 1;
+    }
+
+    /* Botón flotante de teléfono */
+    .phone-float {
+        position: fixed;
+        bottom: 100px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .phone-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--color-primary);
+        border-radius: 50%;
+        color: var(--color-text-base);
+        font-size: 1.4rem;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(255, 210, 51, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .phone-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 210, 51, 0.6);
+    }
+    
+    .phone-tooltip {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .phone-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 4px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .phone-button:hover .phone-tooltip {
+        opacity: 1;
+    }
+
+    /* Animación pulsante para llamar la atención */
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    
+    .whatsapp-button {
+        animation: pulse 2s infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .viscosity-grid,
+        .benefits-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .viscosity-grid,
+        .benefits-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .clarity-content {
+            padding: 2rem;
+        }
+        
+        .clarity-actions {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .phone-float {
+            bottom: 90px;
+            right: 20px;
+        }
+        
+        .whatsapp-tooltip,
+        .phone-tooltip {
+            display: none; /* Ocultar tooltips en móvil para evitar problemas */
+        }
+
+        .service-highlight {
+            flex-direction: column;
+            text-align: center;
+            gap: 0.5rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .viscosity-card,
+        .benefit-card {
+            padding: 1.5rem;
+        }
+        
+        .viscosity-card h3,
+        .benefit-card h3 {
+            font-size: 1.1rem;
+        }
+        
+        .viscosity-card p,
+        .benefit-card p {
+            font-size: 0.9rem;
+        }
+    }
+</style>

@@ -1,0 +1,432 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
+import heroImageBaterias from '../assets/herobaterias.jpg'; // Asegúrate de tener esta imagen
+import Button from '../components/ui/Button.astro';
+
+// --- DATOS CENTRALIZADOS PARA LA PÁGINA DE BATERÍAS ---
+
+const WHATSAPP_NUMBER = "34000000000"; // Tu número de WhatsApp
+
+// Actualizamos los datos de la prueba social
+const socialProofData = {
+    rating: 4.6,
+    reviewCount: 1000
+};
+
+// DATOS COMPLETOS DE LAS MARCAS DE BATERÍAS
+// Asegúrate de que el valor de 'logo' es idéntico al nombre de tu archivo en /src/assets/logos/
+const marcasPrincipales = [
+    { 
+        name: 'VARTA', 
+        logo: 'varta.svg', 
+        description: 'Líder mundial alemán con más de 130 años de experiencia. Tecnología AGM y EFB para vehículos modernos con Start-Stop.' 
+    },
+    { 
+        name: 'FORMULA', 
+        logo: 'formula.svg', 
+        description: 'Especialistas en baterías de automóvil con excelente relación calidad-precio. Tecnología libre de mantenimiento y garantía sólida.' 
+    },
+    { 
+        name: 'AUTOCENTER', 
+        logo: 'autocenter.svg', 
+        description: 'Baterías económicas sin comprometer la calidad. Diseñadas para uso urbano y mixto con fácil instalación.' 
+    },
+    { 
+        name: 'GTI', 
+        logo: 'gti.svg', 
+        description: 'Alto rendimiento para vehículos deportivos y exigentes. Arranque en frío superior y resistencia extrema.' 
+    }
+];
+---
+
+<Layout
+    title="Baterías de Coche a Domicilio - Cambio e Instalación | El Taller de mi Amigo"
+    description="Cambio de batería de coche con recogida y entrega gratuita en Madrid. VARTA, FORMULA, AUTOCENTER y GTI. Instalación profesional a domicilio."
+>
+    <Hero
+        title="Tu batería nueva, <span>instalada donde tú quieras</span>"
+        subtitle="¿Se te ha agotado la batería? No te preocupes. Elige la marca que prefieras y nosotros nos encargamos de todo: recogida, cambio profesional y entrega donde nos digas."
+        image={heroImageBaterias}
+        imageAlt="Batería de coche nueva siendo instalada por mecánico profesional"
+        socialProof={socialProofData}
+    />
+
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title">Nuestras Marcas de Baterías</h2>
+            <p class="section-subtitle">Selecciona tu marca de confianza y contacta directamente por WhatsApp. Te asesoramos con la batería perfecta para tu vehículo.</p>
+            <SelectorMarcas
+                marcasPrincipales={marcasPrincipales}
+                whatsappNumber={WHATSAPP_NUMBER}
+            />
+        </div>
+    </section>
+
+    <section class="page-section benefits-section">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-time-five'></i>
+                    </div>
+                    <h3>Diagnóstico Rápido</h3>
+                    <p>Identificamos si tu batería necesita cambio o si el problema es otro. Diagnóstico gratuito en el momento de la recogida.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-wrench'></i>
+                    </div>
+                    <h3>Instalación Profesional</h3>
+                    <p>Cambio completo con herramientas profesionales. Incluye limpieza de bornes y verificación del sistema de carga.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-recycle'></i>
+                    </div>
+                    <h3>Reciclaje Incluido</h3>
+                    <p>Nos llevamos tu batería antigua para su reciclaje responsable. Cumplimos con toda la normativa medioambiental.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-award'></i>
+                    </div>
+                    <h3>Garantía Extendida</h3>
+                    <p>Todas nuestras baterías incluyen garantía del fabricante más nuestro servicio técnico de seguimiento gratuito.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section clarity-block">
+        <div class="container">
+            <div class="clarity-content">
+                <div class="clarity-icon"><i class='bx bx-battery'></i></div>
+                <h3>¿No estás seguro de qué batería necesitas?</h3>
+                <p>
+                    ¡Tranquilo! Nuestros técnicos identifican la batería exacta que necesita tu vehículo. 
+                    Consideramos la marca, modelo, año, motorización y sistema eléctrico para garantizar compatibilidad total.
+                </p>
+                <div class="emergency-note">
+                    <i class='bx bx-info-circle'></i>
+                    <span><strong>¿Emergencia?</strong> Si tu coche no arranca, ofrecemos servicio de urgencia. Te ayudamos a arrancar y llevamos tu vehículo a cambiar la batería.</span>
+                </div>
+                <div class="clarity-actions">
+                    <Button href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20cambiar%20la%20batería%20de%20mi%20coche.%20¿Podrían%20asesorarme?`} target="_blank">
+                        Consulta por WhatsApp
+                    </Button>
+                    <Button href={`tel:${WHATSAPP_NUMBER}`} variant="secondary">
+                        Llamar Ahora
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Icono Flotante de WhatsApp -->
+    <div class="whatsapp-float">
+        <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20información%20sobre%20baterías%20de%20coche`} target="_blank" rel="noopener" class="whatsapp-button">
+            <i class='bx bxl-whatsapp'></i>
+            <span class="whatsapp-tooltip">¡Escríbenos por WhatsApp!</span>
+        </a>
+    </div>
+
+    <!-- Número de teléfono flotante -->
+    <div class="phone-float">
+        <a href={`tel:${WHATSAPP_NUMBER}`} class="phone-button">
+            <i class='bx bx-phone'></i>
+            <span class="phone-tooltip">Clic para llamar</span>
+        </a>
+    </div>
+</Layout>
+
+<style>
+    .page-section { 
+        padding: 5rem 0; 
+    }
+    
+    .benefits-section {
+        background-color: var(--color-surface-muted);
+    }
+    
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .benefit-card {
+        background: var(--color-surface-base);
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .benefit-icon {
+        font-size: 3rem;
+        color: var(--color-primary);
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--color-text-base);
+    }
+    
+    .benefit-card p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    .clarity-block { 
+        background-color: var(--color-surface-muted); 
+    }
+    
+    .clarity-content { 
+        max-width: 800px; 
+        margin: 0 auto; 
+        text-align: center; 
+        background-color: var(--color-surface-base); 
+        padding: 3rem; 
+        border-radius: 16px; 
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); 
+    }
+    
+    .clarity-icon { 
+        font-size: 3rem; 
+        color: var(--color-primary); 
+        margin-bottom: 1rem; 
+    }
+    
+    .clarity-content h3 { 
+        font-size: 2rem; 
+        margin-bottom: 1rem; 
+    }
+    
+    .clarity-content p { 
+        color: var(--color-text-muted); 
+        font-size: 1.1rem; 
+        line-height: 1.7; 
+        margin-bottom: 2rem; 
+    }
+    
+    .emergency-note {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #856404;
+        font-size: 0.95rem;
+    }
+    
+    .emergency-note i {
+        font-size: 1.2rem;
+        color: #f39c12;
+    }
+    
+    .clarity-actions { 
+        display: flex; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+        gap: 1rem; 
+    }
+
+    /* Botón flotante de WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .whatsapp-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: #25D366;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.8rem;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .whatsapp-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+    
+    .whatsapp-tooltip {
+        position: absolute;
+        right: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .whatsapp-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .whatsapp-button:hover .whatsapp-tooltip {
+        opacity: 1;
+    }
+
+    /* Botón flotante de teléfono */
+    .phone-float {
+        position: fixed;
+        bottom: 100px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .phone-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--color-primary);
+        border-radius: 50%;
+        color: var(--color-text-base);
+        font-size: 1.4rem;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(255, 210, 51, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .phone-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 210, 51, 0.6);
+    }
+    
+    .phone-tooltip {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .phone-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 4px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .phone-button:hover .phone-tooltip {
+        opacity: 1;
+    }
+
+    /* Animación pulsante para llamar la atención */
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    
+    .whatsapp-button {
+        animation: pulse 2s infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .benefits-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .benefits-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .clarity-content {
+            padding: 2rem;
+        }
+        
+        .clarity-actions {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .phone-float {
+            bottom: 90px;
+            right: 20px;
+        }
+        
+        .whatsapp-tooltip,
+        .phone-tooltip {
+            display: none; /* Ocultar tooltips en móvil para evitar problemas */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .benefit-card {
+            padding: 1.5rem;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.1rem;
+        }
+        
+        .benefit-card p {
+            font-size: 0.9rem;
+        }
+    }
+</style>

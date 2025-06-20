@@ -2,35 +2,32 @@
 import { Image, type ImageMetadata } from 'astro:assets';
 import 'boxicons/css/boxicons.min.css';
 
-// 1. Importamos los logos (esto no cambia)
+// Importamos los logos
 const imageAssets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/*.{png,jpg,jpeg,webp}', { eager: true });
 const svgAssets = import.meta.glob<string>('/src/assets/logos/*.svg', { as: 'raw', eager: true });
 
-// 2. Definición de las PROPS (esto no cambia)
+// Definición simplificada de las PROPS
 interface Marca { name: string; logo: string; description: string; }
-interface Props { marcasPrincipales: Marca[]; marcasConfianza: Marca[]; whatsappNumber: string; }
-const { marcasPrincipales, marcasConfianza, whatsappNumber } = Astro.props;
+interface Props { 
+    marcasPrincipales: Marca[]; 
+    whatsappNumber: string; 
+}
+const { marcasPrincipales, whatsappNumber } = Astro.props;
 
-// 3. La función para el enlace de WhatsApp (esto no cambia)
+// Función para el enlace de WhatsApp
 const generateWhatsAppLink = (brandName: string) => {
-    const message = encodeURIComponent(`Hola, estoy interesado/a en neumáticos de la marca ${brandName}. ¿Me podéis asesorar?`);
+    const message = encodeURIComponent(`Hola, estoy interesado/a en baterías de la marca ${brandName}. ¿Me podéis asesorar?`);
     return `https://wa.me/${whatsappNumber}?text=${message}`;
 }
-
-// 4. ¡IMPORTANTE! Hemos eliminado la función `renderBrandCard` de aquí.
 ---
 
-<div class="selector-container">
-    <div class="tabs">
-        <button class="tab-button active" data-tab="principales">Primeras Marcas</button>
-        <button class="tab-button" data-tab="confianza">Marcas de Confianza</button>
-    </div>
-
-    <div class="tab-content active" id="principales">
+<div class="marcas-container">
+    <h3 class="marcas-title">Primeras Marcas</h3>
+    
+    <div class="marcas-grid">
         {marcasPrincipales.map(marca => (
             <a href={generateWhatsAppLink(marca.name)} target="_blank" class="brand-card">
                 <div class="logo-wrapper">
-                    {/* ¡LA LÓGICA DE RENDERIZADO AHORA VIVE AQUÍ, EN LA PLANTILLA! */}
                     {(() => {
                         const imagePath = `/src/assets/logos/${marca.logo}`;
                         // Caso 1: Es un SVG
@@ -58,74 +55,187 @@ const generateWhatsAppLink = (brandName: string) => {
             </a>
         ))}
     </div>
-
-    <div class="tab-content" id="confianza">
-        {marcasConfianza.map(marca => (
-             <a href={generateWhatsAppLink(marca.name)} target="_blank" class="brand-card">
-                <div class="logo-wrapper">
-                    {/* Repetimos la misma lógica aquí */}
-                    {(() => {
-                        const imagePath = `/src/assets/logos/${marca.logo}`;
-                        if (marca.logo.endsWith('.svg')) {
-                            const rawSvg = svgAssets[imagePath];
-                            if (rawSvg) return <div class="logo-svg-wrapper" set:html={rawSvg} />;
-                        } else {
-                            const image = imageAssets[imagePath]?.default;
-                            if (image) return <Image src={image} alt={`Logo ${marca.name}`} class="brand-logo-raster" loading="lazy" />;
-                        }
-                        return <div class="logo-placeholder">{marca.name}</div>;
-                    })()}
-                </div>
-                <div class="card-content">
-                    <h4>{marca.name}</h4>
-                    <p>{marca.description}</p>
-                </div>
-                <div class="card-action">
-                    <span>Consultar por WhatsApp</span>
-                    <i class='bx bxl-whatsapp'></i>
-                </div>
-            </a>
-        ))}
-    </div>
 </div>
 
-<script>
-    // El script de las pestañas no cambia
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            button.classList.add('active');
-            const tabId = button.getAttribute('data-tab');
-            document.getElementById(tabId)?.classList.add('active');
-        });
-    });
-</script>
-
 <style>
-    /* El CSS es el mismo que en la respuesta anterior, no necesita cambios */
-    .logo-wrapper { height: 120px; width: 100%; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background-color: #fdfdfd; filter: grayscale(100%) opacity(0.8); transition: all 0.3s ease-in-out; }
-    .brand-card:hover .logo-wrapper { filter: grayscale(0%) opacity(1); transform: scale(1.05); }
-    .logo-svg-wrapper { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
-    .logo-svg-wrapper :global(svg) { height: 60%; width: auto; max-width: 90%; fill: currentColor; }
-    .brand-logo-raster { height: 60%; width: auto; max-width: 90%; object-fit: contain; }
-    .logo-placeholder { font-weight: bold; color: var(--color-text-muted); background-color: #fdfdfd; }
-    .selector-container { max-width: 1200px; margin: 0 auto; }
-    .tabs { display: flex; justify-content: center; border-bottom: 2px solid var(--border-color); margin-bottom: 3rem; }
-    .tab-button { padding: 1rem 2rem; border: none; background: none; font-size: 1.125rem; font-weight: 600; color: var(--color-text-muted); cursor: pointer; position: relative; transition: color 0.3s; }
-    .tab-button::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background-color: var(--color-primary); transform: scaleX(0); transition: transform 0.3s ease; }
-    .tab-button.active { color: var(--color-text-base); }
-    .tab-button.active::after { transform: scaleX(1); }
-    .tab-content { display: none; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-    .tab-content.active { display: grid; }
-    .brand-card { display: flex; flex-direction: column; background: var(--color-surface-base); border-radius: 16px; border: 1px solid var(--border-color); overflow: hidden; text-decoration: none; color: var(--color-text-base); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .brand-card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
-    .card-content { padding: 1.5rem; flex-grow: 1; }
-    .card-content h4 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .card-content p { font-size: 0.95rem; color: var(--color-text-muted); }
-    .card-action { display: flex; align-items: center; justify-content: center; padding: 1rem; background-color: var(--color-primary); color: var(--color-text-base); font-weight: 600; transition: background-color 0.3s; }
-    .card-action i { font-size: 1.5rem; margin-left: 0.5rem; }
-    .brand-card:hover .card-action { background-color: var(--color-primary-dark); }
+    .marcas-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .marcas-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-text-base);
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+    
+    .marcas-title::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: var(--color-primary);
+        border-radius: 2px;
+    }
+    
+    .marcas-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .brand-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--color-surface-base);
+        border-radius: 16px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        text-decoration: none;
+        color: var(--color-text-base);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .brand-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+    
+    .logo-wrapper {
+        height: 120px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        background-color: #fdfdfd;
+        filter: grayscale(100%) opacity(0.8);
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .brand-card:hover .logo-wrapper {
+        filter: grayscale(0%) opacity(1);
+        transform: scale(1.05);
+    }
+    
+    .logo-svg-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .logo-svg-wrapper :global(svg) {
+        height: 60%;
+        width: auto;
+        max-width: 90%;
+        fill: currentColor;
+    }
+    
+    .brand-logo-raster {
+        height: 60%;
+        width: auto;
+        max-width: 90%;
+        object-fit: contain;
+    }
+    
+    .logo-placeholder {
+        font-weight: bold;
+        color: var(--color-text-muted);
+        background-color: #fdfdfd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+    }
+    
+    .card-content h4 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    
+    .card-content p {
+        font-size: 0.95rem;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+    }
+    
+    .card-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background-color: var(--color-primary);
+        color: var(--color-text-base);
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+    
+    .card-action i {
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+    }
+    
+    .brand-card:hover .card-action {
+        background-color: var(--color-primary-dark, #e6c43d);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .marcas-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        
+        .marcas-title {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card-content {
+            padding: 1.25rem;
+        }
+        
+        .card-content h4 {
+            font-size: 1.25rem;
+        }
+        
+        .card-content p {
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .marcas-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .marcas-title {
+            font-size: 1.5rem;
+        }
+        
+        .card-content {
+            padding: 1rem;
+        }
+        
+        .logo-wrapper {
+            height: 100px;
+            padding: 1rem;
+        }
+    }
 </style>
