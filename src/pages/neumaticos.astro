@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
+import heroImageNeumaticos from '../assets/heroneumaticos.jpg';
+import Button from '../components/ui/Button.astro';
+
+// --- DATOS CENTRALIZADOS PARA LA PÁGINA DE NEUMÁTICOS ---
+
+const WHATSAPP_NUMBER = "34000000000"; // Tu número de WhatsApp
+
+// Actualizamos los datos de la prueba social
+const socialProofData = {
+    rating: 4.6,
+    reviewCount: 1000
+};
+
+// DATOS COMPLETOS DE LAS MARCAS DE NEUMÁTICOS
+// Asegúrate de que el valor de 'logo' es idéntico al nombre de tu archivo en /src/assets/logos/
+const marcasPrincipales = [
+    { name: 'Michelin', logo: 'michelin.svg', description: 'Rendimiento y seguridad líderes en la industria. La elección de los más exigentes.' },
+    { name: 'Continental', logo: 'continental.svg', description: 'Tecnología alemana para un agarre y frenada excepcionales en cualquier clima.' },
+    { name: 'Dunlop', logo: 'dunlop.svg', description: 'Herencia en competición para una experiencia de conducción deportiva y precisa.' },
+    { name: 'Firestone', logo: 'firestone.svg', description: 'Durabilidad y fiabilidad para todo tipo de trayectos, respaldada por Bridgestone.' },
+    { name: 'Hankook', logo: 'hankook.svg', description: 'Innovación y altas prestaciones con una excelente relación calidad-precio.' },
+    { name: 'Yokohama', logo: 'yokohama.svg', description: 'Especialistas en neumáticos de alto rendimiento para una respuesta superior.' },
+    { name: 'Kumho', logo: 'kumho.svg', description: 'Tecnología avanzada a un precio competitivo para conductores inteligentes.' }
+];
+const marcasConfianza = [
+    { name: 'Sava', logo: 'sava.svg', description: 'Calidad europea con una excelente relación durabilidad-precio. Parte del grupo Goodyear.' },
+    { name: 'Autogreen', logo: 'autogreen.svg', description: 'Una opción inteligente y económica sin comprometer la seguridad en carretera.' },
+];
+---
+
+<Layout
+    title="Neumáticos a Domicilio - Primeras Marcas | El Taller de mi Amigo"
+    description="Elige tu marca de neumáticos favorita (Michelin, Continental y más) y nosotros nos encargamos del resto. Servicio de montaje a domicilio en Madrid."
+>
+    <Hero
+        title="Tus neumáticos nuevos, <span>instalados donde tú elijas</span>"
+        subtitle="Olvida las esperas en el taller. Elige la marca que te da confianza y deja que nuestros expertos se encarguen de todo. Nosotros te asesoramos con la medida exacta."
+        image={heroImageNeumaticos}
+        imageAlt="Rueda de coche con llanta deportiva y neumático nuevo de primera marca"
+        socialProof={socialProofData}
+    />
+
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title">Explora Nuestras Marcas</h2>
+            <p class="section-subtitle">Haz clic en tu marca de confianza para iniciar una consulta directa por WhatsApp. Es así de simple.</p>
+            <SelectorMarcas
+                marcasPrincipales={marcasPrincipales}
+                marcasConfianza={marcasConfianza}
+                whatsappNumber={WHATSAPP_NUMBER}
+            />
+        </div>
+    </section>
+
+    <section class="page-section clarity-block">
+        <div class="container">
+            <div class="clarity-content">
+                <div class="clarity-icon"><i class='bx bx-search-alt'></i></div>
+                <h3>¿No sabes la medida? ¿No ves tu marca?</h3>
+                <p>
+                    ¡No te preocupes! Es nuestro trabajo. Contamos con acceso a todas las marcas y medidas del mercado. 
+                    Nuestro equipo técnico identifica la medida exacta para tu vehículo a partir de tu matrícula.
+                </p>
+                <div class="clarity-actions">
+                    <Button href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20asesoramiento%20para%20elegir%20neumáticos.`} target="_blank">
+                        Asesoramiento por WhatsApp
+                    </Button>
+                    <Button href={`tel:${WHATSAPP_NUMBER}`} variant="secondary">
+                        Prefiero Llamar
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .page-section { padding: 5rem 0; }
+    .clarity-block { background-color: var(--color-surface-muted); }
+    .clarity-content { max-width: 800px; margin: 0 auto; text-align: center; background-color: var(--color-surface-base); padding: 3rem; border-radius: 16px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); }
+    .clarity-icon { font-size: 3rem; color: var(--color-primary); margin-bottom: 1rem; }
+    .clarity-content h3 { font-size: 2rem; margin-bottom: 1rem; }
+    .clarity-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; }
+    .clarity-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+</style>

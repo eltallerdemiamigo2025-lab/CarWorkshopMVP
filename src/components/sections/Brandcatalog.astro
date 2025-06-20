@@ -1,0 +1,57 @@
+---
+// Importamos la librería de iconos para usarla en los componentes
+import 'boxicons/css/boxicons.min.css';
+import Button from '../ui/Button.astro';
+
+interface Marca { name: string; logo: string; }
+interface Props {
+  title: string;
+  subtitle: string;
+  marcasPrincipales: Marca[];
+  marcasConfianza: Marca[];
+}
+const { title, subtitle, marcasPrincipales, marcasConfianza } = Astro.props;
+---
+<section id="catalogo">
+  <div class="container">
+    <h2 class="section-title">{title}</h2>
+    <p class="section-subtitle">{subtitle}</p>
+    
+    <div class="brands-block">
+        <h4>Primeras Marcas</h4>
+        <div class="logos-container">
+          {marcasPrincipales.map(brand => (
+            <img src={`/assets/logos/${brand.logo}`} alt={`Logo ${brand.name}`} loading="lazy" decoding="async" />
+          ))}
+        </div>
+    </div>
+
+    <div class="brands-block">
+        <h4>Marcas de Confianza</h4>
+        <div class="logos-container">
+          {marcasConfianza.map(brand => (
+            <img src={`/assets/logos/${brand.logo}`} alt={`Logo ${brand.name}`} loading="lazy" decoding="async" />
+          ))}
+        </div>
+    </div>
+
+    <div class="action-block">
+      <h3>¿Cómo quieres pedir?</h3>
+      <div class="cta-buttons">
+          <Button href="https://wa.me/34000000000" target="_blank">Ya sé la medida</Button>
+          <Button href="tel:+34000000000" variant="secondary">Necesito ayuda</Button>
+      </div>
+    </div>
+
+  </div>
+</section>
+<style>
+  section { padding: 5rem 0; background-color: var(--color-surface-muted); }
+  .brands-block { margin-bottom: 3.5rem; text-align: center; }
+  h4 { font-size: 1.2rem; margin-bottom: 2rem; color: var(--color-text-muted); }
+  .logos-container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 3rem; }
+  .logos-container img { max-height: 40px; width: auto; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease; }
+  .logos-container img:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+  .action-block { margin-top: 4rem; padding: 2.5rem; background-color: var(--color-surface-base); border-radius: 12px; text-align: center; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+  .action-block h3 { margin-bottom: 1.5rem; font-size: 1.8rem; }
+</style>

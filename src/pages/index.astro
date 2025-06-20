@@ -1,11 +1,40 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import ComoFunciona from '../components/sections/ComoFunciona.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Datos específicos para el servicio de Neumáticos
+const pasosNeumaticos = [
+    {
+        icon: 'bx-calendar-check',
+        title: '01. Pide tu cita',
+        description: 'Contacta por WhatsApp o llámanos. Te asesoramos con las medidas y marcas, y cerramos una hora y lugar para la recogida.'
+    },
+    {
+        icon: 'bxs-car-mechanic',
+        title: '02. Recogida y Montaje',
+        description: 'Un mecánico profesional y de confianza recoge tu vehículo. Lo llevamos a nuestro taller para realizar el montaje y equilibrado.'
+    },
+    {
+        icon: 'bx-car',
+        title: '03. Entrega y Pago',
+        description: 'Te devolvemos tu coche listo para rodar donde nos digas. Puedes pagar cómodamente con tarjeta o en efectivo al recibirlo.'
+    }
+];
+
+const puntosDeGarantia = [
+    'Técnicos certificados',
+    'Presupuesto cerrado y sin sorpresas',
+    'Comunicación constante por WhatsApp',
+    'Seguro de responsabilidad civil'
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout 
+    title="Cambio de Neumáticos a Domicilio | El Taller de mi Amigo"
+    description="Servicio profesional de cambio de neumáticos con recogida y entrega en la Comunidad de Madrid. Primeras marcas: Michelin, Continental y más."
+>
+    <ComoFunciona 
+        steps={pasosNeumaticos}
+        guaranteePoints={puntosDeGarantia}
+    />
 </Layout>

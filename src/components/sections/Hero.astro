@@ -1,0 +1,133 @@
+---
+import { type ImageMetadata } from 'astro';
+import Button from '../ui/Button.astro';
+import 'boxicons/css/boxicons.min.css';
+
+// ... (la interfaz de props y la lógica de las estrellas no cambian)
+interface SocialProof { rating: number; reviewCount: number; }
+interface Props { title: string; subtitle: string; image: ImageMetadata; socialProof: SocialProof; }
+const { title, subtitle, image, socialProof } = Astro.props;
+const fullStars = Math.floor(socialProof.rating);
+const hasHalfStar = socialProof.rating % 1 >= 0.5;
+const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+---
+
+<section class="hero-section" style={`background-image: url(${image.src})`}>
+  <div class="hero-overlay"></div>
+  
+  <div class="container hero-content">
+    <h1 class="hero-title" set:html={title} />
+    <p class="hero-subtitle">{subtitle}</p>
+    
+    <div class="hero-actions">
+        <Button href="https://wa.me/34..." target="_blank">Pedir Cita por WhatsApp</Button>
+        <Button href="#servicios" variant="secondary">Ver Servicios</Button>
+    </div>
+
+    <div class="hero-social-proof">
+        <div class="stars" title={`Valoración: ${socialProof.rating} de 5 estrellas`}>
+            {Array(fullStars).fill(0).map(() => <i class='bx bxs-star'></i>)}
+            {hasHalfStar && <i class='bx bxs-star-half'></i>}
+            {Array(emptyStars).fill(0).map(() => <i class='bx bx-star'></i>)}
+        </div>
+        <p>
+            <strong>+{socialProof.reviewCount} reseñas</strong> nos avalan en Madrid
+        </p>
+    </div>
+  </div>
+</section>
+
+<style>
+    .hero-section {
+        position: relative;
+        padding: clamp(6rem, 15vw, 10rem) 0;
+        text-align: center;
+        background-size: cover;
+        background-position: center center;
+        color: var(--color-text-inverse); /* Usamos la nueva variable */
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Overlay con gradiente para un look más sofisticado y mejor legibilidad en la parte inferior */
+        background: linear-gradient(to top, rgba(15, 17, 20, 0.85), rgba(25, 28, 32, 0.6));
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 1s ease-out both;
+    }
+    
+    .hero-title {
+        font-size: clamp(2.8rem, 6vw, 4.2rem);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em; /* Un toque profesional para títulos grandes */
+        margin-bottom: 1.5rem;
+        max-width: 800px;
+        text-shadow: 0 3px 15px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada */
+    }
+    .hero-title :global(span) {
+        color: var(--color-primary);
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        max-width: 650px;
+        margin-bottom: 2.5rem;
+        opacity: 0.95;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+
+    /* Mejora en el botón secundario para que sea más claro */
+    .hero-actions :global(.secondary) {
+        background-color: transparent;
+        color: var(--color-text-inverse);
+        border-color: rgba(255, 255, 255, 0.5); /* Borde semitransparente */
+    }
+    .hero-actions :global(.secondary:hover) {
+        background-color: var(--color-text-inverse);
+        color: var(--color-text-base);
+        border-color: var(--color-text-inverse);
+    }
+
+    .hero-social-proof {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: rgba(0, 0, 0, 0.25);
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+    }
+    .hero-social-proof p { font-size: 0.95rem; }
+    .stars {
+        display: flex;
+        color: var(--color-primary);
+        font-size: 1.25rem;
+    }
+    .stars .bx-star { color: rgba(255, 255, 255, 0.4); }
+
+    @keyframes fadeIn { 
+        from { opacity: 0; transform: translateY(20px); } 
+        to { opacity: 1; transform: translateY(0); } 
+    }
+</style>
