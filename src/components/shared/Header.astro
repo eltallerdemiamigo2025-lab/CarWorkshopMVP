@@ -10,7 +10,13 @@ const navLinks = [
     <div class="container header-container">
         <a href="/" class="logo">eltaller<span class="highlight">demiamigo</span>.com</a>
 
-        <nav>
+        <button class="menu-toggle" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-menu">
             <ul>
                 {navLinks.map(link => (
                     <li><a href={link.href}>{link.label}</a></li>
@@ -19,12 +25,185 @@ const navLinks = [
         </nav>
     </div>
 </header>
+
+<script is:inline>
+    // Script global para el menú hamburguesa que funciona con Astro
+    function initMenu() {
+        const menuBtn = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav-menu');
+        
+        // Limpiar event listeners anteriores
+        if (menuBtn) {
+            menuBtn.replaceWith(menuBtn.cloneNode(true));
+        }
+        
+        // Obtener elementos frescos
+        const newMenuBtn = document.querySelector('.menu-toggle');
+        const newNav = document.querySelector('.nav-menu');
+        
+        // Reset estado
+        if (newNav) newNav.classList.remove('active');
+        if (newMenuBtn) newMenuBtn.classList.remove('active');
+        
+        if (newMenuBtn && newNav) {
+            newMenuBtn.addEventListener('click', () => {
+                newNav.classList.toggle('active');
+                newMenuBtn.classList.toggle('active');
+            });
+            
+            // Cerrar al hacer clic en enlaces
+            const links = newNav.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    newNav.classList.remove('active');
+                    newMenuBtn.classList.remove('active');
+                });
+            });
+        }
+    }
+    
+    // Ejecutar al cargar la página
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMenu);
+    } else {
+        initMenu();
+    }
+    
+    // Ejecutar en cada navegación de Astro
+    document.addEventListener('astro:page-load', initMenu);
+    document.addEventListener('astro:after-swap', initMenu);
+</script>
+
 <style>
-    header { background-color: var(--color-surface-base); padding: 1.5rem 0; border-bottom: 1px solid var(--color-border); }
-    .header-container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-weight: 700; font-size: 1.25rem; text-decoration: none; color: var(--color-text-base); }
-    .logo .highlight { color: var(--color-primary); }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav a { text-decoration: none; color: var(--color-text-muted); font-weight: 600; transition: color 0.2s; }
-    nav a:hover { color: var(--color-primary); }
+    header { 
+        background-color: var(--color-surface-base); 
+        padding: 1rem 0; 
+        border-bottom: 1px solid var(--color-border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .header-container { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+    }
+    
+    .logo { 
+        font-weight: 700; 
+        font-size: 1.25rem; 
+        text-decoration: none; 
+        color: var(--color-text-base); 
+    }
+    
+    .logo .highlight { 
+        color: var(--color-primary); 
+    }
+    
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        gap: 4px;
+    }
+    
+    .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background-color: var(--color-text-base);
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+    
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    nav { 
+        display: block; 
+    }
+    
+    nav ul { 
+        list-style: none; 
+        display: flex; 
+        gap: 2rem; 
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav a { 
+        text-decoration: none; 
+        color: var(--color-text-muted); 
+        font-weight: 600; 
+        transition: color 0.2s; 
+        padding: 0.5rem 0;
+    }
+    
+    nav a:hover { 
+        color: var(--color-primary); 
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: flex;
+        }
+        
+        .nav-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--color-surface-base);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-menu ul {
+            flex-direction: column;
+            gap: 0;
+            padding: 1rem 0;
+        }
+        
+        .nav-menu li {
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .nav-menu li:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--color-text-base);
+            font-size: 1.1rem;
+        }
+        
+        .nav-menu a:hover {
+            background-color: var(--color-surface-muted);
+        }
+    }
 </style>

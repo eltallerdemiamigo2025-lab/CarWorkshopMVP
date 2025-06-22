@@ -1,0 +1,222 @@
+---
+import 'boxicons/css/boxicons.min.css';
+import Button from '../ui/Button.astro';
+
+interface GarantiaItem {
+    icon: string;
+    title: string;
+    description: string;
+}
+
+interface Props {
+    items: GarantiaItem[];
+    whatsappNumber: string;
+}
+
+const { items, whatsappNumber } = Astro.props;
+---
+
+<section class="garantia-seguridad">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Tu Tranquilidad, Nuestra Prioridad</h2>
+            <p class="section-subtitle">Sabemos que confiar tu coche a alguien es importante. Por eso hemos diseñado un servicio que te da total control y visibilidad.</p>
+        </div>
+        
+        <div class="garantias-grid">
+            {items.map(item => (
+                <div class="garantia-card">
+                    <div class="garantia-icon">
+                        <i class={`bx ${item.icon}`}></i>
+                    </div>
+                    <div class="garantia-content">
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+        
+        <div class="garantia-cta">
+            <div class="cta-content">
+                <h3>¿Listo para Probar Nuestro Servicio?</h3>
+                <p>Contacta con nosotros y descubre por qué más de 1000 clientes confían en nosotros para el cambio de sus neumáticos.</p>
+                <div class="cta-buttons">
+                    <Button href={`https://wa.me/${whatsappNumber}?text=Hola,%20quiero%20información%20sobre%20el%20servicio%20de%20neumáticos%20a%20domicilio`} target="_blank">
+                        Pedir Cita por WhatsApp
+                    </Button>
+                    <Button href={`tel:${whatsappNumber}`} variant="secondary">
+                        Llamar Ahora
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .garantia-seguridad {
+        padding: clamp(4rem, 10vw, 6rem) 0;
+        background-color: var(--color-surface-base);
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    
+    .garantias-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+    
+    .garantia-card {
+        background: var(--color-surface-muted);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid var(--color-border);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .garantia-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    }
+    
+    .garantia-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .garantia-icon {
+        font-size: 3rem;
+        color: var(--color-primary);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .garantia-content h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--color-text-base);
+        text-align: center;
+    }
+    
+    .garantia-content p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        font-size: 0.95rem;
+        text-align: center;
+    }
+    
+    .garantia-cta {
+        background: linear-gradient(135deg, var(--color-surface-muted) 0%, var(--color-surface-base) 100%);
+        padding: 3rem;
+        border-radius: 20px;
+        text-align: center;
+        border: 1px solid var(--color-border);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    
+    .cta-content h3 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--color-text-base);
+    }
+    
+    .cta-content p {
+        font-size: 1.1rem;
+        color: var(--color-text-muted);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    @media (max-width: 768px) {
+        .garantias-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .garantia-card {
+            padding: 2rem;
+        }
+        
+        .garantia-cta {
+            padding: 2rem;
+        }
+        
+        .cta-content h3 {
+            font-size: 1.5rem;
+        }
+        
+        .cta-content p {
+            font-size: 1rem;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cta-buttons :global(.btn) {
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .garantia-seguridad {
+            padding: 3rem 0;
+        }
+        
+        .garantia-card {
+            padding: 1.5rem;
+        }
+        
+        .garantia-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .garantia-content h3 {
+            font-size: 1.1rem;
+        }
+        
+        .garantia-content p {
+            font-size: 0.9rem;
+        }
+        
+        .garantia-cta {
+            padding: 1.5rem;
+        }
+        
+        .cta-content h3 {
+            font-size: 1.3rem;
+        }
+        
+        .cta-content p {
+            font-size: 0.95rem;
+        }
+    }
+</style>

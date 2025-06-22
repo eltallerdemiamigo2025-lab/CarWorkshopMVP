@@ -1,0 +1,184 @@
+---
+import 'boxicons/css/boxicons.min.css';
+
+interface ServicioItem {
+    icon: string;
+    title: string;
+    description: string;
+}
+
+interface Props {
+    items: ServicioItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="servicio-completo">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">¿Qué Incluye Nuestro Servicio Completo?</h2>
+            <p class="section-subtitle">No solo cambiamos neumáticos. Te ofrecemos un servicio integral que garantiza la seguridad y el rendimiento de tu vehículo.</p>
+        </div>
+        
+        <div class="servicios-grid">
+            {items.map(item => (
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class={`bx ${item.icon}`}></i>
+                    </div>
+                    <div class="servicio-content">
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+        
+        <div class="servicio-highlight">
+            <div class="highlight-icon">
+                <i class='bx bxs-star'></i>
+            </div>
+            <div class="highlight-content">
+                <h3>Servicio Premium sin Coste Adicional</h3>
+                <p>Todo incluido en el precio. No hay sorpresas ni costes ocultos. Pagas solo por los neumáticos que elijas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .servicio-completo {
+        padding: clamp(4rem, 10vw, 6rem) 0;
+        background-color: var(--color-surface-muted);
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    
+    .servicios-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+    
+    .servicio-card {
+        background: var(--color-surface-base);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid var(--color-border);
+    }
+    
+    .servicio-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .servicio-icon {
+        font-size: 3rem;
+        color: var(--color-primary);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .servicio-content h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--color-text-base);
+        text-align: center;
+    }
+    
+    .servicio-content p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        font-size: 0.95rem;
+        text-align: center;
+    }
+    
+    .servicio-highlight {
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        padding: 3rem;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        color: var(--color-text-base);
+        box-shadow: 0 10px 30px rgba(255, 210, 51, 0.3);
+    }
+    
+    .highlight-icon {
+        font-size: 4rem;
+        flex-shrink: 0;
+    }
+    
+    .highlight-content h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .highlight-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+    
+    @media (max-width: 768px) {
+        .servicios-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .servicio-card {
+            padding: 1.5rem;
+        }
+        
+        .servicio-highlight {
+            flex-direction: column;
+            text-align: center;
+            padding: 2rem;
+            gap: 1rem;
+        }
+        
+        .highlight-icon {
+            font-size: 3rem;
+        }
+        
+        .highlight-content h3 {
+            font-size: 1.3rem;
+        }
+        
+        .highlight-content p {
+            font-size: 1rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .servicio-completo {
+            padding: 3rem 0;
+        }
+        
+        .servicio-card {
+            padding: 1.25rem;
+        }
+        
+        .servicio-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .servicio-content h3 {
+            font-size: 1.1rem;
+        }
+        
+        .servicio-content p {
+            font-size: 0.9rem;
+        }
+    }
+</style>

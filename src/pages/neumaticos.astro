@@ -2,21 +2,42 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
 import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
+import ServicioCompleto from '../components/sections/ServicioCompleto.astro';
+import GarantiaSeguridad from '../components/sections/GarantiaSeguridad.astro';
 import heroImageNeumaticos from '../assets/heroneumaticos.jpg';
-import Button from '../components/ui/Button.astro';
 
-// --- DATOS CENTRALIZADOS PARA LA PÁGINA DE NEUMÁTICOS ---
+// --- DATOS CENTRALIZADOS PARA LA PÁGINA ---
 
-const WHATSAPP_NUMBER = "34000000000"; // Tu número de WhatsApp
+const WHATSAPP_NUMBER = "34000000000";
 
-// Actualizamos los datos de la prueba social
 const socialProofData = {
     rating: 4.6,
     reviewCount: 1000
 };
 
-// DATOS COMPLETOS DE LAS MARCAS DE NEUMÁTICOS
-// Asegúrate de que el valor de 'logo' es idéntico al nombre de tu archivo en /src/assets/logos/
+// --- TEXTOS OPTIMIZADOS PARA SEO Y CONFIANZA ---
+
+const heroData = {
+    title: "Cambio de Neumáticos a Domicilio en Madrid: <span>Recogemos, Montamos y Entregamos</span>",
+    subtitle: "Ahorra tiempo y evita las esperas en el taller. Pide tus neumáticos nuevos y nuestro equipo de profesionales se encarga de todo. Tu coche, listo para rodar, sin moverte de casa.",
+    image: heroImageNeumaticos,
+    imageAlt: "Servicio profesional de montaje de neumáticos a domicilio en la Comunidad de Madrid"
+};
+
+const servicioIncluidoItems = [
+    { icon: 'bxs-car-mechanic', title: 'Montaje y Desmontaje', description: 'Retiramos tus neumáticos antiguos e instalamos los nuevos con maquinaria de última generación.' },
+    { icon: 'bxs-cog', title: 'Equilibrado de Ruedas', description: 'Calibramos cada rueda para eliminar vibraciones y asegurar una conducción suave y segura.' },
+    { icon: 'bxs-direction-left', title: 'Alineado de Dirección', description: 'Ajustamos la geometría de la dirección (paralelo) para evitar desgastes irregulares y que el volante esté recto.' },
+    { icon: 'bxs-check-shield', title: 'Revisión de Seguridad', description: 'Inspeccionamos la presión, el estado de las válvulas y el apriete de los tornillos para tu total tranquilidad.' }
+];
+
+const garantiaItems = [
+    { icon: 'bxs-user-voice', title: 'Contacto Directo y Constante', description: 'Hablarás directamente con nuestro equipo por WhatsApp para saber el estado de tu coche en todo momento. Cero centralitas.' },
+    { icon: 'bxs-map', title: 'Localización y Seguridad', description: 'Tu coche es tratado en uno de nuestros 5 talleres asociados en Madrid. Siempre sabrás dónde está y está cubierto por nuestro seguro.' },
+    { icon: 'bxs-car-garage', title: 'Coche de Sustitución', description: '¿No puedes parar? Solicita nuestro servicio de vehículo de sustitución y sigue con tu día. (Sujeto a disponibilidad).' },
+    { icon: 'bxs-file-blank', title: 'Tu Única Preocupación', description: 'Solo necesitas asegurarte de que tu coche puede circular y tiene la documentación en regla. Del resto, nos ocupamos nosotros.' }
+];
+
 const marcasPrincipales = [
     { name: 'Michelin', logo: 'michelin.svg', description: 'Rendimiento y seguridad líderes en la industria. La elección de los más exigentes.' },
     { name: 'Continental', logo: 'continental.svg', description: 'Tecnología alemana para un agarre y frenada excepcionales en cualquier clima.' },
@@ -26,6 +47,7 @@ const marcasPrincipales = [
     { name: 'Yokohama', logo: 'yokohama.svg', description: 'Especialistas en neumáticos de alto rendimiento para una respuesta superior.' },
     { name: 'Kumho', logo: 'kumho.svg', description: 'Tecnología avanzada a un precio competitivo para conductores inteligentes.' }
 ];
+
 const marcasConfianza = [
     { name: 'Sava', logo: 'sava.svg', description: 'Calidad europea con una excelente relación durabilidad-precio. Parte del grupo Goodyear.' },
     { name: 'Autogreen', logo: 'autogreen.svg', description: 'Una opción inteligente y económica sin comprometer la seguridad en carretera.' },
@@ -33,56 +55,198 @@ const marcasConfianza = [
 ---
 
 <Layout
-    title="Neumáticos a Domicilio - Primeras Marcas | El Taller de mi Amigo"
-    description="Elige tu marca de neumáticos favorita (Michelin, Continental y más) y nosotros nos encargamos del resto. Servicio de montaje a domicilio en Madrid."
+    title="Cambio de Neumáticos a Domicilio en Madrid | Servicio Completo"
+    description="Servicio de cambio de neumáticos con recogida y entrega en Madrid. Incluye montaje, equilibrado y alineado. Primeras marcas. Pide cita por WhatsApp."
 >
     <Hero
-        title="Tus neumáticos nuevos, <span>instalados donde tú elijas</span>"
-        subtitle="Olvida las esperas en el taller. Elige la marca que te da confianza y deja que nuestros expertos se encarguen de todo. Nosotros te asesoramos con la medida exacta."
-        image={heroImageNeumaticos}
-        imageAlt="Rueda de coche con llanta deportiva y neumático nuevo de primera marca"
+        title={heroData.title}
+        subtitle={heroData.subtitle}
+        image={heroData.image}
         socialProof={socialProofData}
+        whatsappNumber={WHATSAPP_NUMBER}
     />
-
-    <section class="page-section">
+    
+    <ServicioCompleto items={servicioIncluidoItems} />
+    
+    <section class="page-section" id="servicios">
         <div class="container">
-            <h2 class="section-title">Explora Nuestras Marcas</h2>
-            <p class="section-subtitle">Haz clic en tu marca de confianza para iniciar una consulta directa por WhatsApp. Es así de simple.</p>
+            <h2 class="section-title">Elige entre las Mejores Marcas de Neumáticos</h2>
+            <p class="section-subtitle">Selecciona la marca que prefieras para iniciar una consulta por WhatsApp. Te asesoramos con la medida y el modelo perfectos para tu coche.</p>
             <SelectorMarcas
                 marcasPrincipales={marcasPrincipales}
+                marcasConfianza={marcasConfianza}
                 whatsappNumber={WHATSAPP_NUMBER}
             />
         </div>
     </section>
 
-    <section class="page-section clarity-block">
-        <div class="container">
-            <div class="clarity-content">
-                <div class="clarity-icon"><i class='bx bx-search-alt'></i></div>
-                <h3>¿No sabes la medida? ¿No ves tu marca?</h3>
-                <p>
-                    ¡No te preocupes! Es nuestro trabajo. Contamos con acceso a todas las marcas y medidas del mercado. 
-                    Nuestro equipo técnico identifica la medida exacta para tu vehículo a partir de tu matrícula.
-                </p>
-                <div class="clarity-actions">
-                    <Button href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20asesoramiento%20para%20elegir%20neumáticos.`} target="_blank">
-                        Asesoramiento por WhatsApp
-                    </Button>
-                    <Button href={`tel:${WHATSAPP_NUMBER}`} variant="secondary">
-                        Prefiero Llamar
-                    </Button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <GarantiaSeguridad items={garantiaItems} whatsappNumber={WHATSAPP_NUMBER} />
+
+    <!-- Icono Flotante de WhatsApp -->
+    <div class="whatsapp-float">
+        <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20información%20sobre%20neumáticos%20de%20coche`} target="_blank" rel="noopener" class="whatsapp-button">
+            <i class='bx bxl-whatsapp'></i>
+            <span class="whatsapp-tooltip">¡Escríbenos por WhatsApp!</span>
+        </a>
+    </div>
+
+    <!-- Número de teléfono flotante -->
+    <div class="phone-float">
+        <a href={`tel:${WHATSAPP_NUMBER}`} class="phone-button">
+            <i class='bx bx-phone'></i>
+            <span class="phone-tooltip">Clic para llamar</span>
+        </a>
+    </div>
 </Layout>
 
 <style>
-    .page-section { padding: 5rem 0; }
-    .clarity-block { background-color: var(--color-surface-muted); }
-    .clarity-content { max-width: 800px; margin: 0 auto; text-align: center; background-color: var(--color-surface-base); padding: 3rem; border-radius: 16px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); }
-    .clarity-icon { font-size: 3rem; color: var(--color-primary); margin-bottom: 1rem; }
-    .clarity-content h3 { font-size: 2rem; margin-bottom: 1rem; }
-    .clarity-content p { color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; }
-    .clarity-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .page-section { 
+        padding: clamp(3rem, 8vw, 5rem) 0; 
+    }
+
+    /* Botón flotante de WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .whatsapp-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: #25D366;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.8rem;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .whatsapp-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+    
+    .whatsapp-tooltip {
+        position: absolute;
+        right: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .whatsapp-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .whatsapp-button:hover .whatsapp-tooltip {
+        opacity: 1;
+    }
+
+    /* Botón flotante de teléfono */
+    .phone-float {
+        position: fixed;
+        bottom: 100px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .phone-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--color-primary);
+        border-radius: 50%;
+        color: var(--color-text-base);
+        font-size: 1.4rem;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(255, 210, 51, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .phone-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 210, 51, 0.6);
+    }
+    
+    .phone-tooltip {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .phone-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 4px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .phone-button:hover .phone-tooltip {
+        opacity: 1;
+    }
+
+    /* Animación pulsante para llamar la atención */
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    
+    .whatsapp-button {
+        animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .phone-float {
+            bottom: 90px;
+            right: 20px;
+        }
+        
+        .whatsapp-tooltip,
+        .phone-tooltip {
+            display: none; /* Ocultar tooltips en móvil para evitar problemas */
+        }
+    }
 </style>

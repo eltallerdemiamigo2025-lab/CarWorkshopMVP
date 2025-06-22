@@ -1,5 +1,6 @@
 ---
-import { Image, type ImageMetadata } from 'astro:assets';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import 'boxicons/css/boxicons.min.css';
 
 // Importamos los logos
@@ -10,13 +11,14 @@ const svgAssets = import.meta.glob<string>('/src/assets/logos/*.svg', { as: 'raw
 interface Marca { name: string; logo: string; description: string; }
 interface Props { 
     marcasPrincipales: Marca[]; 
+    marcasConfianza?: Marca[]; // Opcional
     whatsappNumber: string; 
 }
-const { marcasPrincipales, whatsappNumber } = Astro.props;
+const { marcasPrincipales, marcasConfianza = [], whatsappNumber } = Astro.props;
 
 // Función para el enlace de WhatsApp
 const generateWhatsAppLink = (brandName: string) => {
-    const message = encodeURIComponent(`Hola, estoy interesado/a en baterías de la marca ${brandName}. ¿Me podéis asesorar?`);
+    const message = encodeURIComponent(`Hola, estoy interesado/a en neumáticos de la marca ${brandName}. ¿Me podéis asesorar?`);
     return `https://wa.me/${whatsappNumber}?text=${message}`;
 }
 ---
@@ -55,6 +57,44 @@ const generateWhatsAppLink = (brandName: string) => {
             </a>
         ))}
     </div>
+
+    {marcasConfianza.length > 0 && (
+        <>
+            <h3 class="marcas-title marcas-confianza-title">Marcas de Confianza</h3>
+            
+            <div class="marcas-grid marcas-confianza-grid">
+                {marcasConfianza.map(marca => (
+                    <a href={generateWhatsAppLink(marca.name)} target="_blank" class="brand-card brand-card-confianza">
+                        <div class="logo-wrapper">
+                            {(() => {
+                                const imagePath = `/src/assets/logos/${marca.logo}`;
+                                // Caso 1: Es un SVG
+                                if (marca.logo.endsWith('.svg')) {
+                                    const rawSvg = svgAssets[imagePath];
+                                    if (rawSvg) return <div class="logo-svg-wrapper" set:html={rawSvg} />;
+                                }
+                                // Caso 2: Es una imagen normal (PNG, JPG)
+                                else {
+                                    const image = imageAssets[imagePath]?.default;
+                                    if (image) return <Image src={image} alt={`Logo ${marca.name}`} class="brand-logo-raster" loading="lazy" />;
+                                }
+                                // Caso 3: No se encuentra el logo
+                                return <div class="logo-placeholder">{marca.name}</div>;
+                            })()}
+                        </div>
+                        <div class="card-content">
+                            <h4>{marca.name}</h4>
+                            <p>{marca.description}</p>
+                        </div>
+                        <div class="card-action">
+                            <span>Consultar por WhatsApp</span>
+                            <i class='bx bxl-whatsapp'></i>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </>
+    )}
 </div>
 
 <style>
@@ -195,8 +235,39 @@ const generateWhatsAppLink = (brandName: string) => {
         background-color: var(--color-primary-dark, #e6c43d);
     }
     
+    /* Estilos para marcas de confianza */
+    .marcas-confianza-title {
+        margin-top: 4rem;
+        color: var(--color-text-muted);
+    }
+    
+    .marcas-confianza-title::after {
+        background-color: var(--color-text-muted);
+    }
+    
+    .brand-card-confianza {
+        opacity: 0.9;
+    }
+    
+    .brand-card-confianza:hover {
+        opacity: 1;
+    }
+    
+    .brand-card-confianza .card-action {
+        background-color: var(--color-text-muted);
+        color: white;
+    }
+    
+    .brand-card-confianza:hover .card-action {
+        background-color: var(--color-text-base);
+    }
+    
     /* Responsive Design */
     @media (max-width: 768px) {
+        .marcas-container {
+            padding: 0 1rem;
+        }
+        
         .marcas-grid {
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1rem;
@@ -218,24 +289,56 @@ const generateWhatsAppLink = (brandName: string) => {
         .card-content p {
             font-size: 0.9rem;
         }
+        
+        .card-action {
+            padding: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        .card-action i {
+            font-size: 1.2rem;
+        }
     }
     
     @media (max-width: 480px) {
+        .marcas-container {
+            padding: 0 0.5rem;
+        }
+        
         .marcas-grid {
             grid-template-columns: 1fr;
+            gap: 0.75rem;
         }
         
         .marcas-title {
             font-size: 1.5rem;
+            margin-bottom: 1.5rem;
         }
         
         .card-content {
             padding: 1rem;
         }
         
+        .card-content h4 {
+            font-size: 1.2rem;
+        }
+        
+        .card-content p {
+            font-size: 0.85rem;
+        }
+        
         .logo-wrapper {
             height: 100px;
             padding: 1rem;
+        }
+        
+        .card-action {
+            padding: 0.75rem;
+            font-size: 0.85rem;
+        }
+        
+        .card-action i {
+            font-size: 1.1rem;
         }
     }
 </style>

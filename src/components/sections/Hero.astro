@@ -5,8 +5,14 @@ import 'boxicons/css/boxicons.min.css';
 
 // ... (la interfaz de props y la lógica de las estrellas no cambian)
 interface SocialProof { rating: number; reviewCount: number; }
-interface Props { title: string; subtitle: string; image: ImageMetadata; socialProof: SocialProof; }
-const { title, subtitle, image, socialProof } = Astro.props;
+interface Props { 
+    title: string; 
+    subtitle: string; 
+    image: ImageMetadata; 
+    socialProof: SocialProof;
+    whatsappNumber?: string; // Número de WhatsApp opcional
+}
+const { title, subtitle, image, socialProof, whatsappNumber = "34000000000" } = Astro.props;
 const fullStars = Math.floor(socialProof.rating);
 const hasHalfStar = socialProof.rating % 1 >= 0.5;
 const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -20,7 +26,7 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
     <p class="hero-subtitle">{subtitle}</p>
     
     <div class="hero-actions">
-        <Button href="https://wa.me/34..." target="_blank">Pedir Cita por WhatsApp</Button>
+        <Button href={`https://wa.me/${whatsappNumber}?text=Hola,%20necesito%20información%20sobre%20sus%20servicios`} target="_blank">Pedir Cita por WhatsApp</Button>
         <Button href="#servicios" variant="secondary">Ver Servicios</Button>
     </div>
 
@@ -129,5 +135,86 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
     @keyframes fadeIn { 
         from { opacity: 0; transform: translateY(20px); } 
         to { opacity: 1; transform: translateY(0); } 
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: clamp(4rem, 12vw, 6rem) 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .hero-actions {
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-actions :global(.btn) {
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+        }
+        
+        .hero-social-proof {
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-radius: 25px;
+        }
+        
+        .hero-social-proof p {
+            font-size: 0.9rem;
+        }
+        
+        .stars {
+            font-size: 1.1rem;
+        }
+    }
+
+    /* Responsive para pantallas muy pequeñas */
+    @media (max-width: 480px) {
+        .hero-section {
+            padding: 3rem 0;
+            min-height: 90vh;
+        }
+        
+        .hero-title {
+            font-size: 1.8rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.95rem;
+            padding: 0 0.5rem;
+        }
+        
+        .hero-actions {
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-social-proof {
+            padding: 0.75rem 1rem;
+        }
+    }
+
+    @media (max-width: 375px) {
+        .hero-section {
+            min-height: 100vh;
+        }
     }
 </style>
