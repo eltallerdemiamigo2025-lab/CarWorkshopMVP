@@ -1,5 +1,6 @@
 ---
 import FeatureSnippet from "@/components/home/FeatureSnippet.astro";
+import WhatsappLinkButton from "@/components/home/WhatsappLinkButton";
 import LinkButton from "@/components/ui/LinkButton.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
@@ -21,9 +22,8 @@ import Layout from "@/layouts/Layout.astro";
       </p>
 
       <article class="mt-8 flex justify-center gap-2">
-        <LinkButton href="/baterias" text="Ver baterías" />
-        <LinkButton href="/neumaticos" text="Ver productos" />
-        <LinkButton href="/filtros" text="Ver aceites y filtros" />
+        <LinkButton href="/baterias" text="Ver servicios" />
+        <WhatsappLinkButton href="/contacto" text="Contactar" />
       </article>
 
       <article class="mt-24 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -47,7 +47,7 @@ import Layout from "@/layouts/Layout.astro";
         />
       </article>
 
-      
+
     </section>
   </main>
 </Layout>
