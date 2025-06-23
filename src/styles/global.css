@@ -19,87 +19,27 @@
   /* Bordes */
   --color-border: #e5e7eb;
 
-  /* Fuentes */
-  --font-primary: 'Montserrat', sans-serif;
+
+  /* Colores del minidiseño de Figma */
+  --color-black: #000000;
+  --color-yellow: #FFDD00;
+  --color-gray-title: #B7BABD;
 }
 
-/* --- RESET BÁSICO Y ESTILOS GLOBALES --- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { 
-    scroll-behavior: smooth; 
-    font-family: var(--font-primary);
-    height: 100%;
-}
-body { 
-    background-color: var(--color-surface-base); 
-    color: var(--color-text-base); 
-    line-height: 1.6;
-    min-height: 100vh;
-    width: 100%;
-} 
-main { 
-    overflow-x: hidden;
-    width: 100%;
-    min-height: 100vh;
-} /* Evita overflow horizontal */
-
-/* --- SCROLL SUAVE CON OFFSET PARA SECCIONES --- */
-html {
-    scroll-padding-top: 100px; /* Offset para que las secciones no queden pegadas al header */
-}
-
-/* --- CLASES GLOBALES REUTILIZABLES --- */
-.container { 
-    width: 100%; 
-    max-width: 1120px; 
-    margin: 0 auto; 
-    padding: 0 24px; 
-}
-
-/* --- TÍTULOS GLOBALES REUTILIZABLES --- */
-.section-title { 
-    font-size: clamp(2rem, 5vw, 2.5rem); 
-    font-weight: 700; 
-    text-align: center; 
-    margin-bottom: 1rem; 
-}
-.section-subtitle { 
-    font-size: 1.125rem; 
-    color: var(--color-text-muted); 
-    max-width: 600px; 
-    text-align: center; 
-    margin: 0 auto 3.5rem auto; 
-}
-
-/* --- RESPONSIVE PARA MÓVILES --- */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 16px;
-    }
-    
-    body {
-        min-height: 100vh;
-        width: 100%;
-    }
-    
-    main {
-        min-height: 100vh;
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 12px;
-    }
-    
-    .section-title {
-        font-size: clamp(1.5rem, 4vw, 2rem);
-        margin-bottom: 0.75rem;
-    }
-    
-    .section-subtitle {
-        font-size: 1rem;
-        margin-bottom: 2.5rem;
-    }
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .title-primary {
+    color: var(--color-black);
+  }
+  
+  .title-secondary {
+    color: var(--color-gray-title);
+  }
+  
+  .bg-primary {
+    background-color: var(--color-yellow);
+  }
 }

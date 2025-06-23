@@ -1,0 +1,27 @@
+---
+import LinkButton from "@/components/ui/LinkButton.astro";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="El Taller de mi Amigo | Recogemos, Reparamos, Entregamos"
+  description="Servicio profesional de mantenimiento de vehículos con recogida y entrega en Madrid. Neumáticos, baterías, aceites. Primeras marcas y precios sin sorpresas."
+>
+  <main class="flex items-start justify-center">
+    <section class="mt-12 max-w-4xl mx-auto">
+      <h1 class="text-4xl text-center font-semibold">
+        Recogemos, reparamos, <span class="title-secondary">entregamos</span>
+      </h1>
+
+      <p class="mt-4 text-center">
+        Mandamos a un mecánico a tu casa para recoger el coche. Lo revisamos y reparamos en nuestro taller. Te lo entregamos de vuelta en tu casa al terminar.
+      </p>
+
+      <article class="mt-8 flex justify-center gap-2">
+        <LinkButton href="/baterias" text="Ver baterías" />
+        <LinkButton href="/neumaticos" text="Ver productos" />
+        <LinkButton href="/filtros" text="Ver aceites y filtros" />
+      </article>
+    </section>
+  </main>
+</Layout>
