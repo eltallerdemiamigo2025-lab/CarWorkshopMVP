@@ -13,7 +13,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 export default function WhatsappLinkButton({ href, text }: { href: string, text: string }) {
   return (
     <a href={href}>
-      <div className="px-5 py-3 bg-green-500 rounded-lg w-fit flex gap-2 items-center">
+      <div className="px-5 py-3 bg-green-500 hover:bg-green-600 transition-colors rounded-lg w-fit flex gap-2 items-center">
         <WhatsAppIcon className="w-4 h-4 text-white" />
 
         <p className="font-semibold text-white">

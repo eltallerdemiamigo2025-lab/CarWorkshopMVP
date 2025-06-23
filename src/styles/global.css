@@ -21,9 +21,9 @@
 
 
   /* Colores del minidiseño de Figma */
-  --color-black: #000000;
-  --color-yellow: #FFDD00;
-  --color-gray-title: #B7BABD;
+  --color-black: #000000; /* text-black en tailwind */
+  --color-yellow: #FFDD00; /* Approx text-yellow-300 en tailwind */
+  --color-gray-title: #B7BABD; /* text-gray-500 en tailwind */
 }
 
 @layer base {
