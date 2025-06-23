@@ -1,4 +1,5 @@
 ---
+import FeatureSnippet from "@/components/home/FeatureSnippet.astro";
 import LinkButton from "@/components/ui/LinkButton.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
@@ -8,13 +9,15 @@ import Layout from "@/layouts/Layout.astro";
   description="Servicio profesional de mantenimiento de vehículos con recogida y entrega en Madrid. Neumáticos, baterías, aceites. Primeras marcas y precios sin sorpresas."
 >
   <main class="flex items-start justify-center">
-    <section class="mt-12 max-w-4xl mx-auto">
+    <section class="mt-20 max-w-4xl mx-auto">
       <h1 class="text-4xl text-center font-semibold">
         Recogemos, reparamos, <span class="title-secondary">entregamos</span>
       </h1>
 
       <p class="mt-4 text-center">
-        Mandamos a un mecánico a tu casa para recoger el coche. Lo revisamos y reparamos en nuestro taller. Te lo entregamos de vuelta en tu casa al terminar.
+        Mandamos a un mecánico a tu casa para recoger el coche. Lo revisamos y
+        reparamos en nuestro taller. Te lo entregamos de vuelta en tu casa al
+        terminar.
       </p>
 
       <article class="mt-8 flex justify-center gap-2">
@@ -22,6 +25,29 @@ import Layout from "@/layouts/Layout.astro";
         <LinkButton href="/neumaticos" text="Ver productos" />
         <LinkButton href="/filtros" text="Ver aceites y filtros" />
       </article>
+
+      <article class="mt-24 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <FeatureSnippet
+          title="Recogemos"
+          description="Nos entregas las llaves en el momento, cuando se presente el mecánico en tu casa."
+          imageUrl="/coche.png"
+        />
+
+        <FeatureSnippet
+          title="Reparamos"
+          description="Lo vemos de arriba abajo en el taller y hacemos todas las reparaciones necesarias."
+          imageUrl="/herramientas.png"
+          imageSize="w-24"
+        />  
+
+        <FeatureSnippet
+          title="Entregamos"
+          description="Tras terminar, mandamos a un mecánico de vuelta a tu casa para entregarte el vehículo y las llaves."
+          imageUrl="/entrega.png"
+        />
+      </article>
+
+      
     </section>
   </main>
 </Layout>
