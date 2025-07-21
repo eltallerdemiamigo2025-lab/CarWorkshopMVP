@@ -75,32 +75,35 @@ const navLinks = [
 </script>
 
 <style>
-    header { 
-        background-color: var(--color-surface-base); 
-        padding: 1rem 0; 
+    header {
+        background-color: var(--color-surface-base);
+        padding: 1.5rem 0; /* Aumentar padding vertical */
         border-bottom: 1px solid var(--color-border);
         position: sticky;
         top: 0;
         z-index: 1000;
     }
-    
-    .header-container { 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px; /* Añadir un max-width para centrar el contenido */
+        margin: 0 auto; /* Centrar el contenedor */
+        padding: 0 2rem; /* Añadir padding horizontal */
     }
-    
-    .logo { 
-        font-weight: 700; 
-        font-size: 1.25rem; 
-        text-decoration: none; 
-        color: var(--color-text-base); 
+
+    .logo {
+        font-weight: 700;
+        font-size: 1.5rem; /* Aumentar tamaño de fuente */
+        text-decoration: none;
+        color: var(--color-text-base);
     }
-    
-    .logo .highlight { 
-        color: var(--color-primary); 
+
+    .logo .highlight {
+        color: var(--color-primary);
     }
-    
+
     .menu-toggle {
         display: none;
         flex-direction: column;
@@ -108,102 +111,131 @@ const navLinks = [
         border: none;
         cursor: pointer;
         padding: 0.5rem;
-        gap: 4px;
+        gap: 5px; /* Aumentar espacio */
     }
-    
+
     .menu-toggle span {
-        width: 25px;
+        width: 28px; /* Hacerlo un poco más grande */
         height: 3px;
         background-color: var(--color-text-base);
-        transition: all 0.3s ease;
+        transition: all 0.3s ease-in-out;
         border-radius: 2px;
     }
-    
+
     .menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 6px);
     }
-    
+
     .menu-toggle.active span:nth-child(2) {
         opacity: 0;
     }
-    
+
     .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(6px, -6px);
     }
-    
-    nav { 
-        display: block; 
+
+    nav {
+        display: block;
     }
-    
-    nav ul { 
-        list-style: none; 
-        display: flex; 
-        gap: 2rem; 
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center; /* Centrar verticalmente */
+        gap: 2.5rem; /* Aumentar espaciado */
         margin: 0;
         padding: 0;
     }
-    
-    nav a { 
-        text-decoration: none; 
-        color: var(--color-text-muted); 
-        font-weight: 600; 
-        transition: color 0.2s; 
+
+    nav a {
+        text-decoration: none;
+        color: var(--color-text-muted);
+        font-weight: 600;
+        font-size: 1.1rem; /* Aumentar tamaño de fuente */
+        transition: color 0.3s, transform 0.3s;
         padding: 0.5rem 0;
+        position: relative;
     }
-    
-    nav a:hover { 
-        color: var(--color-primary); 
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--color-primary);
+        transition: width 0.3s ease-in-out;
     }
+
+    nav a:hover {
+        color: var(--color-primary);
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
 
     /* Responsive para móviles */
     @media (max-width: 768px) {
+        .header-container {
+            padding: 0 1.5rem; /* Ajustar padding para móviles */
+        }
+
         .menu-toggle {
             display: flex;
+            z-index: 1001; /* Asegurar que esté por encima del menú */
         }
-        
+
         .nav-menu {
-            position: absolute;
-            top: 100%;
+            position: fixed; /* Usar fixed para cubrir toda la pantalla */
+            top: 0;
             left: 0;
             right: 0;
-            background-color: var(--color-surface-base);
-            border-bottom: 1px solid var(--color-border);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-100%);
+            bottom: 0;
+            background-color: rgba(24, 24, 27, 0.95); /* Fondo oscuro semi-transparente */
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%); /* Empezar fuera de la pantalla */
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
         }
-        
+
         .nav-menu.active {
-            transform: translateY(0);
+            transform: translateX(0);
             opacity: 1;
             visibility: visible;
         }
-        
+
         .nav-menu ul {
             flex-direction: column;
-            gap: 0;
-            padding: 1rem 0;
+            gap: 2rem; /* Espaciado entre elementos del menú */
+            padding: 0;
+            text-align: center;
         }
-        
+
         .nav-menu li {
-            border-bottom: 1px solid var(--color-border);
+            border: none;
         }
-        
-        .nav-menu li:last-child {
-            border-bottom: none;
-        }
-        
+
         .nav-menu a {
             display: block;
             padding: 1rem 2rem;
-            color: var(--color-text-base);
-            font-size: 1.1rem;
+            color: #FAFAFA; /* Texto claro para contraste */
+            font-size: 2rem; /* Letras grandes para el menú móvil */
+            font-weight: 700;
+            transition: color 0.3s, transform 0.3s;
         }
-        
+
         .nav-menu a:hover {
-            background-color: var(--color-surface-muted);
+            color: var(--color-primary);
+            transform: scale(1.1);
         }
     }
 </style>

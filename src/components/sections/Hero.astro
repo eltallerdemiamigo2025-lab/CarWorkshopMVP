@@ -46,11 +46,17 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 <style>
     .hero-section {
         position: relative;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         padding: clamp(6rem, 15vw, 10rem) 0;
         text-align: center;
         background-size: cover;
         background-position: center center;
-        color: var(--color-text-inverse); /* Usamos la nueva variable */
+        color: var(--color-text-inverse);
+        overflow: hidden;
     }
 
     .hero-overlay {
@@ -71,6 +77,9 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
         flex-direction: column;
         align-items: center;
         animation: fadeIn 1s ease-out both;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
     }
     
     .hero-title {
@@ -144,6 +153,9 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
             min-height: 80vh;
             display: flex;
             align-items: center;
+            width: 100vw;
+            left: 50%;
+            margin-left: -50vw;
         }
         
         .hero-title {

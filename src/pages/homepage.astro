@@ -23,11 +23,12 @@ import ServiceCard from "@/components/home/ServiceCard";
       </p>
 
       <article class="mt-8 flex justify-center gap-2">
-        <LinkButton href="/servicios??" text="Ver servicios" />
+        <LinkButton href="#servicios" text="Ver servicios" />
         <WhatsappLinkButton href="/contacto" text="Contactar" />
       </article>
 
       <article
+        id="servicios"
         class="mt-24 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3"
       >
         <FeatureSnippet
@@ -55,7 +56,7 @@ import ServiceCard from "@/components/home/ServiceCard";
           Descubre nuestros <span class="title-secondary">servicios</span>
         </h2>
 
-        <div class="mt-6 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div id="servicios" class="mt-6 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3 servicios-scroll-anchor">
           <ServiceCard
             title="Neumáticos"
             description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
@@ -76,3 +77,14 @@ import ServiceCard from "@/components/home/ServiceCard";
     </section>
   </main>
 </Layout>
+
+<style>
+.servicios-scroll-anchor {
+  scroll-margin-top: 110px;
+}
+@media (max-width: 768px) {
+  .servicios-scroll-anchor {
+    scroll-margin-top: 80px;
+  }
+}
+</style>

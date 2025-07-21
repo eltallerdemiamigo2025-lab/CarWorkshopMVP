@@ -3,43 +3,54 @@
 /* --- PALETA DE COLORES PROFESIONAL --- */
 :root {
   /* Color primario (un amarillo más vivo y eléctrico) */
-  --color-primary: #FFD233; 
-  --color-primary-dark: #e6b825; /* Para efectos hover */
-  
+  --color-primary: #FFD233;
+  --color-primary-dark: #e6b825;
+  /* Para efectos hover */
+
   /* Colores de Texto */
-  --color-text-base: #2d2d2d;     
-  --color-text-muted: #6b7280; 
-  --color-text-inverse: #ffffff; /* Para textos sobre fondos oscuros */
+  --color-text-base: #2d2d2d;
+  --color-text-muted: #6b7280;
+  --color-text-inverse: #ffffff;
+  /* Para textos sobre fondos oscuros */
 
   /* Colores de Superficie */
   --color-surface-base: #ffffff;
-  --color-surface-muted: #f9fafb; 
-  --color-surface-dark: rgba(25, 28, 32, 0.75); /* Overlay un poco más oscuro */
+  --color-surface-muted: #f9fafb;
+  --color-surface-dark: rgba(25, 28, 32, 0.75);
+  /* Overlay un poco más oscuro */
 
   /* Bordes */
   --color-border: #e5e7eb;
 
 
   /* Colores del minidiseño de Figma */
-  --color-black: #000000; /* text-black en tailwind */
-  --color-yellow: #FFDD00; /* Approx text-yellow-300 en tailwind */
-  --color-gray-title: #B7BABD; /* text-gray-500 en tailwind */
+  --color-black: #000000;
+  /* text-black en tailwind */
+  --color-yellow: #FFDD00;
+  /* Approx text-yellow-300 en tailwind */
+  --color-gray-title: #B7BABD;
+  /* text-gray-500 en tailwind */
 }
 
 @layer base {
   html {
     font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
   }
-  
+
   .title-primary {
     color: var(--color-black);
   }
-  
+
   .title-secondary {
     color: var(--color-gray-title);
   }
-  
+
   .bg-primary {
     background-color: var(--color-yellow);
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }

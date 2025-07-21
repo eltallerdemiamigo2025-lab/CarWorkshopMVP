@@ -1,0 +1,72 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="footer-main">
+  <div class="footer-content container">
+    <div class="footer-brand">
+      <span class="footer-logo">eltaller<span class="footer-highlight">demiamigo</span>.com</span>
+    </div>
+    <nav class="footer-links">
+      <a href="/aviso-legal" class="footer-link">Aviso legal</a>
+      <a href="/privacidad" class="footer-link">Política de privacidad</a>
+    </nav>
+    <div class="footer-copy">
+      &copy; {year} eltallerdemiamigo.com. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer-main {
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  padding: 2.5rem 0 1.5rem 0;
+  font-size: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.footer-logo {
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--color-text-base);
+  letter-spacing: -0.01em;
+}
+.footer-highlight {
+  color: var(--color-primary);
+}
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: var(--color-primary-dark);
+}
+.footer-copy {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .footer-content {
+    gap: 0.7rem;
+  }
+  .footer-logo {
+    font-size: 1.05rem;
+  }
+  .footer-links {
+    gap: 1rem;
+    font-size: 0.95rem;
+  }
+}
+</style>
