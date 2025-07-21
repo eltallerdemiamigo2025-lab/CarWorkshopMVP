@@ -156,12 +156,10 @@ const generateWhatsAppLink = (brandName: string) => {
         justify-content: center;
         padding: 1.5rem;
         background-color: #fdfdfd;
-        filter: grayscale(100%) opacity(0.8);
         transition: all 0.3s ease-in-out;
     }
     
     .brand-card:hover .logo-wrapper {
-        filter: grayscale(0%) opacity(1);
         transform: scale(1.05);
     }
     
@@ -186,6 +184,14 @@ const generateWhatsAppLink = (brandName: string) => {
         max-width: 90%;
         object-fit: contain;
     }
+
+    /* Make b_autocenter.jpg and b_gti.jpg 20% bigger */
+    .brand-logo-raster[src*="b_autocenter.jpg"],
+    .brand-logo-raster[src*="b_gti.jpg"] {
+        height: 122%;
+        max-width: 116%;
+    }
+
     
     .logo-placeholder {
         font-weight: bold;
