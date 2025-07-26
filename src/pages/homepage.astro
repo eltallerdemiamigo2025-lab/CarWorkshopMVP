@@ -4,16 +4,23 @@ import WhatsappLinkButton from "@/components/ui/WhatsappLinkButton";
 import LinkButton from "@/components/ui/LinkButton.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCard from "@/components/home/ServiceCard";
+import homeBackground from "@/assets/homebackground.png";
+import paso1 from "@/assets/logos/paso1.png";
+import paso2 from "@/assets/logos/paso2.png";
+import paso3 from "@/assets/logos/paso3.png";
+import paso4 from "@/assets/logos/paso4.png";
 ---
 
 <Layout
   title="El Taller de mi Amigo | Recogemos, Reparamos, Entregamos"
   description="Servicio profesional de mantenimiento de vehículos con recogida y entrega en Madrid. Neumáticos, baterías, aceites. Primeras marcas y precios sin sorpresas."
 >
-  <main class="flex my-24 items-start justify-center">
-    <section class="max-w-4xl mx-auto">
+  <!-- Hero Section with Background -->
+  <section class="hero-section" style={`background-image: url(${homeBackground.src})`}>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
       <h1 class="text-4xl text-center font-semibold">
-        Recogemos, reparamos, <span class="title-secondary">entregamos</span>
+        Recogemos, reparamos, entregamos
       </h1>
 
       <p class="mt-4 text-center">
@@ -26,32 +33,42 @@ import ServiceCard from "@/components/home/ServiceCard";
         <LinkButton href="#servicios" text="Ver servicios" />
         <WhatsappLinkButton href="/contacto" text="Contactar" />
       </article>
+    </div>
+  </section>
 
+  <!-- Rest of Content -->
+  <main class="flex items-start justify-center">
+    <section class="max-w-4xl mx-auto">
       <article
         id="servicios"
-        class="mt-24 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3"
+        class="mt-12 grid grid-cols- gap-40 md:grid-cols-2 lg:grid-cols-4"
       >
         <FeatureSnippet
-          title="Recogemos"
-          description="Nos entregas las llaves en el momento, cuando se presente el mecánico en tu casa."
-          imageUrl="/coche.png"
+          title="Solicitud"
+          description="Solicita el servicio desde la comodidad de tu casa."
+          imageUrl={paso1.src}
         />
 
         <FeatureSnippet
-          title="Reparamos"
-          description="Lo vemos de arriba abajo en el taller y hacemos todas las reparaciones necesarias."
-          imageUrl="/herramientas.png"
-          imageSize="w-24"
+          title="Recogida"
+          description="Recogemos el vehículo en el momento y lugar que nos indiques."
+          imageUrl={paso2.src}
         />
 
         <FeatureSnippet
-          title="Entregamos"
-          description="Tras terminar, mandamos a un mecánico de vuelta a tu casa para entregarte el vehículo y las llaves."
-          imageUrl="/entrega.png"
+          title="Reparación"
+          description="Reparamos el vehículo en nuestro taller y le hacemos una revisión general gratuita."
+          imageUrl={paso3.src}
+          imageSize="w-40"
+        />
+        <FeatureSnippet
+          title="Entrega"
+          description="Tras terminar, te lo entregamos en el momento y lugar que nos indiques."
+          imageUrl={paso4.src}
         />
       </article>
 
-      <article class="mt-24">
+      <article class="mt-24 mb-12">
         <h2 class="text-3xl text-center font-semibold">
           Descubre nuestros <span class="title-secondary">servicios</span>
         </h2>
@@ -85,6 +102,70 @@ import ServiceCard from "@/components/home/ServiceCard";
 @media (max-width: 768px) {
   .servicios-scroll-anchor {
     scroll-margin-top: 80px;
+  }
+}
+
+/* Hero Section Styles */
+.hero-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: clamp(6rem, 15vw, 10rem) 0;
+  text-align: center;
+  background-size: cover;
+  background-position: center center;
+  color: var(--color-text-inverse);
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  background: linear-gradient(to top, rgba(15, 17, 20, 0.85), rgba(25, 28, 32, 0.6));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.hero-content h1 {
+  color: var(--color-text-inverse);
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p {
+  color: var(--color-text-inverse);
+  opacity: 0.95;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: clamp(4rem, 12vw, 6rem) 0;
+  }
+  
+  .hero-content h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+  }
+  
+  .hero-content p {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    padding: 0 1rem;
   }
 }
 </style>
