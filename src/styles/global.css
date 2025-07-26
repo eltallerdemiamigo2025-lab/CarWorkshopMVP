@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* --- PALETA DE COLORES PROFESIONAL --- */
 :root {
   /* Color primario (un amarillo más vivo y eléctrico) */
-  --color-primary: #FFD233;
+  --color-primary: #ffd233;
   --color-primary-dark: #e6b825;
   /* Para efectos hover */
 
@@ -22,20 +22,18 @@
   /* Bordes */
   --color-border: #e5e7eb;
 
-
   /* Colores del minidiseño de Figma */
   --color-black: #000000;
   /* text-black en tailwind */
-  --color-yellow: #FFDD00;
+  --color-yellow: #ffdd00;
   /* Approx text-yellow-300 en tailwind */
-  --color-gray-title: #B7BABD;
+  --color-gray-title: #b7babd;
   /* text-gray-500 en tailwind */
 }
 
 @layer base {
   html {
     font-family: 'Montserrat', sans-serif;
-    scroll-behavior: smooth;
   }
 
   .title-primary {

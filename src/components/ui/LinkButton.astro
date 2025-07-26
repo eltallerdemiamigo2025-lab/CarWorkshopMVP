@@ -8,9 +8,9 @@ const { href, text } = Astro.props;
 
 ---
 
-<a href={href}>
-  <div class="px-5 py-3 bg-yellow-300 hover:bg-yellow-400 transition-colors rounded-lg w-fit">
-    <p class="font-semibold">
+<a href={href} class="group">
+  <div class="px-5 py-3 bg-yellow-300 group-hover:bg-yellow-400 transition-colors rounded-lg w-fit">
+    <p class="font-semibold text-amber-900 group-hover:text-amber-800 transition-colors">
       {text}
     </p>
   </div>

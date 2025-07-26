@@ -4,7 +4,7 @@ import WhatsappLinkButton from "@/components/ui/WhatsappLinkButton";
 import LinkButton from "@/components/ui/LinkButton.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCard from "@/components/home/ServiceCard";
-import homeBackground from "@/assets/homebackground.png";
+import homeBackground from "@/assets/homebackground3.png";
 import paso1 from "@/assets/logos/paso1.png";
 import paso2 from "@/assets/logos/paso2.png";
 import paso3 from "@/assets/logos/paso3.png";
@@ -16,9 +16,11 @@ import paso4 from "@/assets/logos/paso4.png";
   description="Servicio profesional de mantenimiento de vehículos con recogida y entrega en Madrid. Neumáticos, baterías, aceites. Primeras marcas y precios sin sorpresas."
 >
   <!-- Hero Section with Background -->
-  <section class="hero-section" style={`background-image: url(${homeBackground.src})`}>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
+  <section class="w-dvw relative" style={{ height: 'calc(100dvh - 80px)'}}>
+    <img src={homeBackground.src} class="absolute inset-0 object-cover" style={{height: 'calc(100dvh - 80px)'}} />
+    <div class="bg-black/60 absolute inset-0" style={{height: 'calc(100dvh - 80px)'}} />
+    
+    <div class="text-white translate-y-0 pt-86">
       <h1 class="text-4xl text-center font-semibold">
         Recogemos, reparamos, entregamos
       </h1>
@@ -36,135 +38,57 @@ import paso4 from "@/assets/logos/paso4.png";
   </section>
 
   <!-- Rest of Content -->
-  <main class="flex items-start justify-center">
-    <section class="max-w-4xl mx-auto">
-      <article
-        id="servicios"
-        class="mt-12 grid grid-cols- gap-40 md:grid-cols-2 lg:grid-cols-4"
-      >
-        <FeatureSnippet
-          title="Solicitud"
-          description="Solicita el servicio desde la comodidad de tu casa."
-          imageUrl={paso1.src}
-        />
+  <main class="flex flex-col items-end justify-center">
+    <article
+      class="max-w-6xl mx-auto mt-12 grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+    >
+      <FeatureSnippet
+        title="Solicitud"
+        description="Solicita el servicio desde la comodidad de tu casa."
+        imageUrl={paso1.src}
+      />
 
-        <FeatureSnippet
-          title="Recogida"
-          description="Recogemos el vehículo en el momento y lugar que nos indiques."
-          imageUrl={paso2.src}
-        />
+      <FeatureSnippet
+        title="Recogida"
+        description="Recogemos el vehículo en el momento y lugar que nos indiques."
+        imageUrl={paso2.src}
+      />
 
-        <FeatureSnippet
-          title="Reparación"
-          description="Reparamos el vehículo en nuestro taller y le hacemos una revisión general gratuita."
-          imageUrl={paso3.src}
-          imageSize="w-40"
-        />
-        <FeatureSnippet
-          title="Entrega"
-          description="Tras terminar, te lo entregamos en el momento y lugar que nos indiques."
-          imageUrl={paso4.src}
-        />
-      </article>
+      <FeatureSnippet
+        title="Reparación"
+        description="Reparamos el vehículo en nuestro taller y le hacemos una revisión general gratuita."
+        imageUrl={paso3.src}
+        imageSize="w-40"
+      />
+      <FeatureSnippet
+        title="Entrega"
+        description="Tras terminar, te lo entregamos en el momento y lugar que nos indiques."
+        imageUrl={paso4.src}
+      />
+    </article>
 
-      <article class="mt-24 mb-12">
-        <h2 class="text-3xl text-center font-semibold">
-          Descubre nuestros <span class="title-secondary">servicios</span>
-        </h2>
+    <article class="max-w-4xl mx-auto mt-24 mb-12">
+      <h2 class="text-3xl text-center font-semibold">
+        Descubre nuestros <span class="title-secondary">servicios</span>
+      </h2>
 
-        <div id="servicios" class="mt-6 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3 servicios-scroll-anchor">
-          <ServiceCard
-            title="Neumáticos"
-            description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
-            icon="car"
-          />
-          <ServiceCard
-            title="Baterías"
-            description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
-            icon="battery"
-          />
-          <ServiceCard
-            title="Aceites y filtros"
-            description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
-            icon="fuel"
-          />
-        </div>
-      </article>
-    </section>
+      <div id="servicios" class="mt-6 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3 servicios-scroll-anchor">
+        <ServiceCard
+          title="Neumáticos"
+          description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
+          icon="car"
+        />
+        <ServiceCard
+          title="Baterías"
+          description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
+          icon="battery"
+        />
+        <ServiceCard
+          title="Aceites y filtros"
+          description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
+          icon="fuel"
+        />
+      </div>
+    </article>
   </main>
 </Layout>
-
-<style>
-.servicios-scroll-anchor {
-  scroll-margin-top: 110px;
-}
-@media (max-width: 768px) {
-  .servicios-scroll-anchor {
-    scroll-margin-top: 80px;
-  }
-}
-
-/* Hero Section Styles */
-.hero-section {
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  padding: clamp(6rem, 15vw, 10rem) 0;
-  text-align: center;
-  background-size: cover;
-  background-position: center center;
-  color: var(--color-text-inverse);
-  overflow: hidden;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 110%;
-  background: linear-gradient(to top, rgba(15, 17, 20, 0.85), rgba(25, 28, 32, 0.6));
-  z-index: 1;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.hero-content h1 {
-  color: var(--color-text-inverse);
-  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);
-}
-
-.hero-content p {
-  color: var(--color-text-inverse);
-  opacity: 0.95;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-/* Responsive for mobile */
-@media (max-width: 768px) {
-  .hero-section {
-    padding: clamp(4rem, 12vw, 6rem) 0;
-  }
-  
-  .hero-content h1 {
-    font-size: clamp(2rem, 5vw, 2.8rem);
-  }
-  
-  .hero-content p {
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    padding: 0 1rem;
-  }
-}
-</style>
