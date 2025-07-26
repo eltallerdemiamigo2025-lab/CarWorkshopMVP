@@ -38,7 +38,7 @@ export default function ServiceCard({ title, description, icon }: Props) {
   return (
     <a
       href={getHref(icon)}
-      className="rounded-lg p-8 bg-gray-50 transition-all duration-200 shadow hover:shadow-lg hover:bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer block text-inherit no-underline"
+      className="rounded-lg p-8 bg-gray-50 transition-all duration-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 cursor-pointer block text-inherit no-underline"
       style={{ textDecoration: 'none' }}
     >
       <article className="mb-4 flex justify-center">{getIcon(icon)}</article>
