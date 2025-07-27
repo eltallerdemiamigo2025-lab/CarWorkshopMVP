@@ -4,7 +4,7 @@ import tireLogo from '../../assets/logos/tire.png';
 import batteryLogo from '../../assets/logos/battery.png';
 import fuelLogo from '../../assets/logos/aceiteyfiltros.png';
 import brakesLogo from '../../assets/logos/freno.svg';
-import mechanicLogo from '../../assets/logos/mecanicagris.png';
+import mechanicLogo from '../../assets/logos/mecanica.png';
 
 interface Props {
   title: string;
