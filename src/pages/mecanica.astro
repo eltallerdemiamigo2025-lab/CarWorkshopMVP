@@ -18,19 +18,19 @@ const socialProofData = {
 // DATOS COMPLETOS DE LOS SERVICIOS MECÁNICOS
 const serviciosPrincipales = [
     { 
-        name: 'REPARACIÓN AVERÍA', 
-        logo: 'mecanicagris.svg',
-        description: 'Consulta por WhatsApp cualquier tipo de reparación mecánica. Diagnóstico profesional y solución rápida para todas las averías.' 
+        name: 'Reparación de Avería', 
+        logo: 'mecanicagris.png',
+        description: 'Solucionamos cualquier problema mecánico, desde fallos de motor y transmisión hasta problemas eléctricos. Realizamos un diagnóstico preciso para ofrecerte una reparación eficaz y duradera.' 
     },
     { 
-        name: 'CORREA DE DISTRIBUCIÓN', 
-        logo: 'correadistribuciongris.svg',
-        description: 'Cambio de correa de distribución con recogida y entrega. Servicio completo con garantía y piezas de primera calidad.' 
+        name: 'Correa de Distribución', 
+        logo: 'correadistribuciongris.png',
+        description: 'Servicio vital para la salud de tu motor. Realizamos el cambio del kit completo de distribución (correa, tensores, bomba de agua) con piezas de primeras marcas para garantizar la máxima fiabilidad.' 
     },
     { 
-        name: 'OTROS SERVICIOS', 
-        logo: '',
-        description: 'Diagnosis, carga aire acondicionado, luces, chapa y pintura (carrocería). Servicios integrales para tu vehículo.'
+        name: 'Otros Servicios', 
+        logo: 'otrosserviciosgris.png',
+        description: 'Un servicio integral para tu coche. Realizamos diagnosis electrónica, reparaciones de chapa y pintura, carga de aire acondicionado, cambio de luces, revisiones pre-ITV y más. Consúltanos para cualquier otra necesidad.'
     }
 ];
 
@@ -68,6 +68,7 @@ const garantiaItems = [
             <SelectorMarcas
                 marcasPrincipales={serviciosPrincipales}
                 whatsappNumber={WHATSAPP_NUMBER}
+                isBrand={false}
             />
         </div>
     </section>
@@ -91,7 +92,7 @@ const garantiaItems = [
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class='bx bx-shield-check'></i>
+                        <i class='bx bx-check-shield'></i>
                     </div>
                     <h3>Garantía Total</h3>
                     <p>Todas nuestras reparaciones incluyen garantía del fabricante más nuestro servicio técnico de seguimiento gratuito.</p>
