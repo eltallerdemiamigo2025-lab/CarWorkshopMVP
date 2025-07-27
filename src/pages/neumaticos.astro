@@ -5,7 +5,8 @@ import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
 import ServicioCompleto from '../components/sections/ServicioCompleto.astro';
 import GarantiaSeguridad from '../components/sections/GarantiaSeguridad.astro';
 import heroImageNeumaticos from '../assets/heroneumaticos.jpg';
-import equilibrado from "@/assets/logos/equilibrado.svg";
+import iconEquilibrado from "../assets/logos/equilibradoamarillo.svg";
+import iconDireccion from "../assets/logos/alineado_direccionamarillo.svg";
 
 // --- DATOS CENTRALIZADOS PARA LA PÁGINA ---
 
@@ -26,8 +27,8 @@ const heroData = {
 
 const servicioIncluidoItems = [
     { icon: 'bxs-car-mechanic', title: 'Montaje y Desmontaje', description: 'Retiramos tus neumáticos antiguos e instalamos los nuevos con maquinaria de última generación.' },
-    { icon: 'bxs-cog', title: 'Equilibrado de Ruedas', description: 'Calibramos cada rueda para eliminar vibraciones y asegurar una conducción suave y segura.' },
-    { icon: 'bxs-direction-left', title: 'Alineado de Dirección', description: 'Ajustamos la geometría de la dirección (paralelo) para evitar desgastes irregulares y que el volante esté recto.' },
+    { icon: iconEquilibrado, title: 'Equilibrado de Ruedas', description: 'Calibramos cada rueda para eliminar vibraciones y asegurar una conducción suave y segura.' },
+    { icon: iconDireccion, title: 'Alineado de Dirección', description: 'Ajustamos la geometría de la dirección (paralelo) para evitar desgastes irregulares y que el volante esté recto.' },
     { icon: 'bxs-check-shield', title: 'Revisión de Seguridad', description: 'Inspeccionamos la presión, el estado de las válvulas y el apriete de los tornillos para tu total tranquilidad.' }
 ];
 
