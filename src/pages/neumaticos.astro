@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
+import type { ImageMetadata } from 'astro';
 import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
 import ServicioCompleto from '../components/sections/ServicioCompleto.astro';
 import GarantiaSeguridad from '../components/sections/GarantiaSeguridad.astro';
 import heroImageNeumaticos from '../assets/heroneumaticos.jpg';
 import iconEquilibrado from "../assets/logos/equilibradoamarillo.svg";
 import iconDireccion from "../assets/logos/alineado_direccionamarillo.svg";
+import neumatico_medidas from "../assets/medidas_neumatico2.png";
 
 // --- DATOS CENTRALIZADOS PARA LA PÁGINA ---
 
@@ -70,6 +72,62 @@ const marcasConfianza = [
     
     <ServicioCompleto items={servicioIncluidoItems} />
     
+    <!-- Nueva sección: Cómo leer las medidas de un neumático -->
+<section class="page-section medidas-section" id="como-leer-neumatico">
+        <div class="container">
+            <h2 class="section-title">¿Cómo Leer las Medidas de tu Neumático?</h2>
+            <p class="section-subtitle">Interpreta fácilmente los números de tu neumático para saber qué necesitas.</p>
+            
+            <div class="medidas-content">
+                <div class="medidas-image">
+                    <img src={neumatico_medidas.src} alt="Explicación visual de cómo leer las medidas de un neumático 215/65R15 95V" class="neumatico-img" />
+                </div>
+                
+                <div class="medidas-explicacion">
+                    <div class="medida-item">
+                        <div class="medida-numero">215</div>
+                        <div class="medida-info">
+                            <h3>Ancho Seccional</h3>
+                            <p>Anchura en <strong>milímetros</strong> de la banda de rodadura.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="medida-item">
+                        <div class="medida-numero">65</div>
+                        <div class="medida-info">
+                            <h3>Relación de Aspecto</h3>
+                            <p><strong>Porcentaje</strong> que indica cuán alto es el costado del neumático en relación con su ancho total.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="medida-item">
+                        <div class="medida-numero">15</div>
+                        <div class="medida-info">
+                            <h3>Diámetro de la Rueda</h3>
+                            <p>Diámetro interior en <strong>pulgadas</strong>.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="medida-item">
+                        <div class="medida-numero">95V</div>
+                        <div class="medida-info">
+                            <h3>Carga e Índice de Velocidad</h3>
+                            <p><strong>95:</strong> Carga máxima 690 kg. <strong>V:</strong> Velocidad máxima 240 km/h.</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            
+            <div class="medidas-cta">
+                <p class="cta-text">¿No estás seguro de qué medida necesitas? Nuestros expertos te asesoran gratuitamente.</p>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20ayuda%20para%20saber%20qué%20medida%20de%20neumático%20necesito`} target="_blank" rel="noopener" class="cta-button">
+                    <i class='bx bxl-whatsapp'></i>
+                    Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+    
     <section class="page-section" id="servicios">
         <div class="container">
             <h2 class="section-title">Elige entre las Mejores Marcas de Neumáticos</h2>
@@ -124,6 +182,380 @@ const marcasConfianza = [
         font-weight: 500;
         text-shadow: 0 1px 6px rgba(0,0,0,0.04);
         text-align: center;
+    }
+
+    /* Nueva sección de medidas */
+    .medidas-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .medidas-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        pointer-events: none;
+    }
+
+    .medidas-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin: 3rem 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    .medidas-image {
+        text-align: center;
+    }
+
+    .neumatico-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease;
+    }
+
+    .neumatico-img:hover {
+        transform: scale(1.05);
+    }
+
+    .medidas-explicacion {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .medida-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        border-left: 4px solid var(--color-primary);
+    }
+
+    .medida-item:hover {
+        transform: translateX(8px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    }
+
+    .medida-numero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--color-primary) 0%, #e6c200 100%);
+        color: var(--color-text-base);
+        font-size: 1.5rem;
+        font-weight: 800;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(255, 210, 51, 0.3);
+        flex-shrink: 0;
+    }
+
+    .medida-info h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-text-base);
+        margin: 0 0 0.5rem 0;
+    }
+
+    .medida-info p {
+        font-size: 1rem;
+        color: var(--color-text-base);
+        opacity: 0.8;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .medida-info strong {
+        color: var(--color-primary);
+        font-weight: 600;
+    }
+
+    .medidas-cta {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 2rem;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+
+    .cta-text {
+        font-size: 1.1rem;
+        color: var(--color-text-base);
+        margin: 0 0 1.5rem 0;
+        font-weight: 500;
+    }
+
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        background: #25D366;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+    }
+
+    .cta-button:hover {
+        background: #20b358;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
+    }
+
+    .cta-button i {
+        font-size: 1.3rem;
+    }
+
+    /* Responsive para medidas */
+    @media (max-width: 968px) {
+        .medidas-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .medida-item {
+            gap: 1rem;
+            padding: 1.25rem;
+        }
+
+        .medida-numero {
+            width: 50px;
+            height: 50px;
+            font-size: 1.25rem;
+        }
+
+        .medida-info h3 {
+            font-size: 1.1rem;
+        }
+
+        .medida-info p {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .medida-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .medida-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .cta-button {
+            padding: 0.875rem 1.5rem;
+            font-size: 1rem;
+        }
+    }
+
+    /* Nueva sección de medidas */
+    .medidas-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .medidas-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        pointer-events: none;
+    }
+
+    .medidas-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin: 3rem 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    .medidas-image {
+        text-align: center;
+    }
+
+    .neumatico-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease;
+    }
+
+    .neumatico-img:hover {
+        transform: scale(1.05);
+    }
+
+    .medidas-explicacion {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .medida-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        border-left: 4px solid var(--color-primary);
+    }
+
+    .medida-item:hover {
+        transform: translateX(8px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    }
+
+    .medida-numero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--color-primary) 0%, #e6c200 100%);
+        color: var(--color-text-base);
+        font-size: 1.5rem;
+        font-weight: 800;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(255, 210, 51, 0.3);
+        flex-shrink: 0;
+    }
+
+    .medida-info h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-text-base);
+        margin: 0 0 0.5rem 0;
+    }
+
+    .medida-info p {
+        font-size: 1rem;
+        color: var(--color-text-base);
+        opacity: 0.8;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .medida-info strong {
+        color: var(--color-primary);
+        font-weight: 600;
+    }
+
+    .medidas-cta {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 2rem;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+
+    .cta-text {
+        font-size: 1.1rem;
+        color: var(--color-text-base);
+        margin: 0 0 1.5rem 0;
+        font-weight: 500;
+    }
+
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        background: #25D366;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+    }
+
+    .cta-button:hover {
+        background: #20b358;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
+    }
+
+    .cta-button i {
+        font-size: 1.3rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+        .medidas-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .medida-item {
+            gap: 1rem;
+            padding: 1.25rem;
+        }
+
+        .medida-numero {
+            width: 50px;
+            height: 50px;
+            font-size: 1.25rem;
+        }
+
+        .medida-info h3 {
+            font-size: 1.1rem;
+        }
+
+        .medida-info p {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .medida-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .medida-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .cta-button {
+            padding: 0.875rem 1.5rem;
+            font-size: 1rem;
+        }
     }
 
     /* Botón flotante de WhatsApp */
