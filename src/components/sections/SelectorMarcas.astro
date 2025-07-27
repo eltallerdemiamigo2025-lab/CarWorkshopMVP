@@ -9,12 +9,13 @@ const svgAssets = import.meta.glob<string>('/src/assets/logos/*.svg', { as: 'raw
 
 // Definición simplificada de las PROPS
 interface Marca { name: string; logo: string; description: string; }
-interface Props { 
-    marcasPrincipales: Marca[]; 
+interface Props {
+    marcasPrincipales: Marca[];
     marcasConfianza?: Marca[]; // Opcional
-    whatsappNumber: string; 
+    whatsappNumber: string;
+    isBrand?: boolean;
 }
-const { marcasPrincipales, marcasConfianza = [], whatsappNumber } = Astro.props;
+const { marcasPrincipales, marcasConfianza = [], whatsappNumber, isBrand = true } = Astro.props;
 
 // Función para el enlace de WhatsApp
 const generateWhatsAppLink = (brandName: string) => {
@@ -24,8 +25,8 @@ const generateWhatsAppLink = (brandName: string) => {
 ---
 
 <div class="marcas-container">
-    <h3 class="marcas-title">Primeras Marcas</h3>
-    
+    <h3 class="marcas-title">{isBrand ? 'Primeras Marcas' : 'Nuestros Servicios'}</h3>
+
     <div class="marcas-grid">
         {marcasPrincipales.map(marca => (
             <a href={generateWhatsAppLink(marca.name)} target="_blank" class="brand-card">
@@ -61,7 +62,7 @@ const generateWhatsAppLink = (brandName: string) => {
     {marcasConfianza.length > 0 && (
         <>
             <h3 class="marcas-title marcas-confianza-title">Marcas de Confianza</h3>
-            
+
             <div class="marcas-grid marcas-confianza-grid">
                 {marcasConfianza.map(marca => (
                     <a href={generateWhatsAppLink(marca.name)} target="_blank" class="brand-card brand-card-confianza">
@@ -102,7 +103,7 @@ const generateWhatsAppLink = (brandName: string) => {
         max-width: 1200px;
         margin: 0 auto;
     }
-    
+
     .marcas-title {
         font-size: 2rem;
         font-weight: 700;
@@ -111,7 +112,7 @@ const generateWhatsAppLink = (brandName: string) => {
         margin-bottom: 3rem;
         position: relative;
     }
-    
+
     .marcas-title::after {
         content: '';
         position: absolute;
@@ -123,13 +124,13 @@ const generateWhatsAppLink = (brandName: string) => {
         background-color: var(--color-primary);
         border-radius: 2px;
     }
-    
+
     .marcas-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
         gap: 1.5rem;
     }
-    
+
     .brand-card {
         display: flex;
         flex-direction: column;
@@ -142,12 +143,12 @@ const generateWhatsAppLink = (brandName: string) => {
         box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
+
     .brand-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 12px 30px rgba(0,0,0,0.1);
     }
-    
+
     .logo-wrapper {
         height: 200px;
         width: 100%;
@@ -158,11 +159,11 @@ const generateWhatsAppLink = (brandName: string) => {
         background-color: #fdfdfd;
         transition: all 0.3s ease-in-out;
     }
-    
+
     .brand-card:hover .logo-wrapper {
         transform: scale(1.05);
     }
-    
+
     .logo-svg-wrapper {
         display: flex;
         align-items: center;
@@ -170,14 +171,14 @@ const generateWhatsAppLink = (brandName: string) => {
         width: 100%;
         height: 100%;
     }
-    
+
     .logo-svg-wrapper :global(svg) {
         height: 95%;
         width: auto;
         max-width: 90%;
         fill: currentColor;
     }
-    
+
     .brand-logo-raster {
         height: 95%;
         width: auto;
@@ -192,7 +193,7 @@ const generateWhatsAppLink = (brandName: string) => {
         max-width: 116%;
     }
 
-    
+
     .logo-placeholder {
         font-weight: bold;
         color: var(--color-text-muted);
@@ -203,24 +204,24 @@ const generateWhatsAppLink = (brandName: string) => {
         height: 100%;
         width: 100%;
     }
-    
+
     .card-content {
         padding: 1.5rem;
         flex-grow: 1;
     }
-    
+
     .card-content h4 {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
         font-weight: 600;
     }
-    
+
     .card-content p {
         font-size: 0.95rem;
         color: var(--color-text-muted);
         line-height: 1.6;
     }
-    
+
     .card-action {
         display: flex;
         align-items: center;
@@ -231,118 +232,118 @@ const generateWhatsAppLink = (brandName: string) => {
         font-weight: 600;
         transition: background-color 0.3s;
     }
-    
+
     .card-action i {
         font-size: 1.5rem;
         margin-left: 0.5rem;
     }
-    
+
     .brand-card:hover .card-action {
         background-color: var(--color-primary-dark, #e6c43d);
     }
-    
+
     /* Estilos para marcas de confianza */
     .marcas-confianza-title {
         margin-top: 4rem;
         color: var(--color-text-muted);
     }
-    
+
     .marcas-confianza-title::after {
         background-color: var(--color-text-muted);
     }
-    
+
     .brand-card-confianza {
         opacity: 0.9;
     }
-    
+
     .brand-card-confianza:hover {
         opacity: 1;
     }
-    
+
     .brand-card-confianza .card-action {
         background-color: var(--color-text-muted);
         color: white;
     }
-    
+
     .brand-card-confianza:hover .card-action {
         background-color: var(--color-text-base);
     }
-    
+
     /* Responsive Design */
     @media (max-width: 768px) {
         .marcas-container {
             padding: 0 1rem;
         }
-        
+
         .marcas-grid {
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1rem;
         }
-        
+
         .marcas-title {
             font-size: 1.75rem;
             margin-bottom: 2rem;
         }
-        
+
         .card-content {
             padding: 1.25rem;
         }
-        
+
         .card-content h4 {
             font-size: 1.25rem;
         }
-        
+
         .card-content p {
             font-size: 0.9rem;
         }
-        
+
         .card-action {
             padding: 0.75rem;
             font-size: 0.9rem;
         }
-        
+
         .card-action i {
             font-size: 1.2rem;
         }
     }
-    
+
     @media (max-width: 480px) {
         .marcas-container {
             padding: 0 0.5rem;
         }
-        
+
         .marcas-grid {
             grid-template-columns: 1fr;
             gap: 0.75rem;
         }
-        
+
         .marcas-title {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .card-content {
             padding: 1rem;
         }
-        
+
         .card-content h4 {
             font-size: 1.2rem;
         }
-        
+
         .card-content p {
             font-size: 0.85rem;
         }
-        
+
         .logo-wrapper {
             height: 130px;
             padding: 1rem;
         }
-        
+
         .card-action {
             padding: 0.75rem;
             font-size: 0.85rem;
         }
-        
+
         .card-action i {
             font-size: 1.1rem;
         }

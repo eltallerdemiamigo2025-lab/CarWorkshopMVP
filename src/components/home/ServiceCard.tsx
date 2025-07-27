@@ -3,11 +3,13 @@ import { CarFrontIcon, Battery, FuelIcon } from 'lucide-react';
 import tireLogo from '../../assets/logos/tire.png';
 import batteryLogo from '../../assets/logos/battery.png';
 import fuelLogo from '../../assets/logos/aceiteyfiltros.png';
+import brakesLogo from '../../assets/logos/freno.svg';
+import mechanicLogo from '../../assets/logos/mecanicagris.png';
 
 interface Props {
   title: string;
   description: string;
-  icon: "car" | "battery" | "fuel";
+  icon: "car" | "battery" | "fuel" | "brakes" | "mechanic";
 }
 
 function getHref(icon: Props["icon"]): string {
@@ -18,6 +20,10 @@ function getHref(icon: Props["icon"]): string {
       return "/baterias";
     case "fuel":
       return "/filtros";
+    case "brakes":
+      return "/frenos";
+    case "mechanic":
+      return "/mecanica";
     default:
       return "/";
   }
@@ -31,6 +37,10 @@ function getIcon(icon: Props["icon"]): React.ReactNode {
       return <img src={batteryLogo.src} alt="Batería" className="w-16 h-16 object-contain" />;
     case "fuel":
       return <img src={fuelLogo.src} alt="Aceite y Filtros" className="w-16 h-16 object-contain" />;
+    case "brakes":
+      return <img src={brakesLogo.src} alt="Frenos" className="w-16 h-16 object-contain" />;
+    case "mechanic":
+      return <img src={mechanicLogo.src} alt="Mecánica" className="w-16 h-16 object-contain" />;
   }
 }
 
