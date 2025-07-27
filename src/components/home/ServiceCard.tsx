@@ -2,7 +2,7 @@ import React from 'react'
 import { CarFrontIcon, Battery, FuelIcon } from 'lucide-react';
 import tireLogo from '../../assets/logos/tire.png';
 import batteryLogo from '../../assets/logos/battery.png';
-import fuelLogo from '../../assets/logos/engine-oil.png';
+import fuelLogo from '../../assets/logos/aceiteyfiltros.png';
 
 interface Props {
   title: string;
@@ -26,11 +26,11 @@ function getHref(icon: Props["icon"]): string {
 function getIcon(icon: Props["icon"]): React.ReactNode {
   switch (icon) {
     case "car":
-      return <img src={tireLogo.src} alt="Neumáticos" className="w-12 h-12 object-contain" />;
+      return <img src={tireLogo.src} alt="Neumáticos" className="w-16 h-16 object-contain" />;
     case "battery":
-      return <img src={batteryLogo.src} alt="Batería" className="w-12 h-12 object-contain" />;
+      return <img src={batteryLogo.src} alt="Batería" className="w-16 h-16 object-contain" />;
     case "fuel":
-      return <img src={fuelLogo.src} alt="Aceite y Filtros" className="w-12 h-12 object-contain" />;
+      return <img src={fuelLogo.src} alt="Aceite y Filtros" className="w-16 h-16 object-contain" />;
   }
 }
 

@@ -1,0 +1,461 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
+import heroImageMecanica from '../assets/heroneumaticos.jpg'; // Using existing image for now
+import Button from '../components/ui/Button.astro';
+
+// --- DATOS CENTRALIZADOS PARA LA PÁGINA DE MECÁNICA ---
+
+const WHATSAPP_NUMBER = "34000000000"; // Tu número de WhatsApp
+
+// Actualizamos los datos de la prueba social
+const socialProofData = {
+    rating: 4.6,
+    reviewCount: 1000
+};
+
+// DATOS COMPLETOS DE LOS SERVICIOS MECÁNICOS
+const serviciosPrincipales = [
+    { 
+        name: 'REPARACIÓN AVERÍA', 
+        logo: '', // Using existing logo for now
+        description: 'Consulta por WhatsApp cualquier tipo de reparación mecánica. Diagnóstico profesional y solución rápida para todas las averías.' 
+    },
+    { 
+        name: 'CORREA DE DISTRIBUCIÓN', 
+        logo: '', // Using existing logo for now
+        description: 'Cambio de correa de distribución con recogida y entrega. Servicio completo con garantía y piezas de primera calidad.' 
+    },
+    { 
+        name: 'OTROS SERVICIOS', 
+        logo: '', // Using existing logo for now
+        description: 'Diagnosis, carga aire acondicionado, luces, chapa y pintura (carrocería). Servicios integrales para tu vehículo.' 
+    }
+];
+
+const servicioIncluidoItems = [
+    { icon: 'bxs-wrench', title: 'Diagnóstico Profesional', description: 'Identificamos el problema exacto de tu vehículo con equipos de diagnosis de última generación.' },
+    { icon: 'bxs-cog', title: 'Reparación Especializada', description: 'Reparamos cualquier tipo de avería mecánica con herramientas profesionales y experiencia garantizada.' },
+    { icon: 'bxs-car-garage', title: 'Servicio Completo', description: 'Desde diagnosis hasta reparación final. Incluye recogida, reparación y entrega en tu domicilio.' },
+    { icon: 'bxs-award', title: 'Garantía Total', description: 'Todas nuestras reparaciones incluyen garantía y seguimiento técnico gratuito.' }
+];
+
+const garantiaItems = [
+    { icon: 'bxs-user-voice', title: 'Contacto Directo y Constante', description: 'Hablarás directamente con nuestro equipo por WhatsApp para saber el estado de tu coche en todo momento. Cero centralitas.' },
+    { icon: 'bxs-map', title: 'Localización y Seguridad', description: 'Tu coche es tratado en uno de nuestros talleres asociados en Madrid. Siempre sabrás dónde está y está cubierto por nuestro seguro.' },
+    { icon: 'bxs-car-garage', title: 'Coche de Sustitución', description: '¿No puedes parar? Solicita nuestro servicio de vehículo de sustitución y sigue con tu día. (Sujeto a disponibilidad).' },
+    { icon: 'bxs-file-blank', title: 'Tu Única Preocupación', description: 'Solo necesitas asegurarte de que tu coche puede circular y tiene la documentación en regla. Del resto, nos ocupamos nosotros.' }
+];
+---
+
+<Layout
+    title="Mecánica de Coche - Reparación y Mantenimiento a Domicilio | El Taller de mi Amigo"
+    description="Servicio de mecánica con recogida y entrega gratuita en Madrid. Reparación averías, correa de distribución, diagnosis y más. Mecánica profesional a domicilio."
+>
+    <Hero
+        title="Tu coche en las mejores manos, <span>mecánica profesional donde tú quieras</span>"
+        subtitle="¿Tu coche tiene algún problema? No te preocupes. Consulta cualquier reparación mecánica por WhatsApp y nosotros nos encargamos de todo: recogida, reparación profesional y entrega donde nos digas."
+        image={heroImageMecanica}
+        socialProof={socialProofData}
+        whatsappNumber={WHATSAPP_NUMBER}
+    />
+
+    <section class="page-section" id="servicios">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios Mecánicos</h2>
+            <p class="section-subtitle">Selecciona el servicio que necesitas y contacta directamente por WhatsApp. Te asesoramos con la mejor solución para tu vehículo.</p>
+            <SelectorMarcas
+                marcasPrincipales={serviciosPrincipales}
+                whatsappNumber={WHATSAPP_NUMBER}
+            />
+        </div>
+    </section>
+
+    <section class="page-section benefits-section">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-search-alt'></i>
+                    </div>
+                    <h3>Diagnóstico Completo</h3>
+                    <p>Identificamos cualquier problema mecánico con equipos de diagnosis avanzados. Diagnóstico gratuito en el momento de la recogida.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-wrench'></i>
+                    </div>
+                    <h3>Reparación Profesional</h3>
+                    <p>Reparamos cualquier avería con herramientas profesionales y experiencia garantizada. Desde simples hasta complejas.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-shield-check'></i>
+                    </div>
+                    <h3>Garantía Total</h3>
+                    <p>Todas nuestras reparaciones incluyen garantía del fabricante más nuestro servicio técnico de seguimiento gratuito.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class='bx bx-time-five'></i>
+                    </div>
+                    <h3>Servicio Rápido</h3>
+                    <p>Reparaciones urgentes y programadas. Siempre priorizamos tu tiempo y te mantenemos informado del progreso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section clarity-block">
+        <div class="container">
+            <div class="clarity-content">
+                <div class="clarity-icon"><i class='bx bx-help-circle'></i></div>
+                <h3>¿No estás seguro de qué necesita tu coche?</h3>
+                <p>
+                    ¡Tranquilo! Nuestros técnicos identifican el problema exacto que tiene tu vehículo. 
+                    Consideramos la marca, modelo, año, motorización y síntomas para garantizar la mejor solución.
+                </p>
+                <div class="emergency-note">
+                    <i class='bx bx-info-circle'></i>
+                    <span><strong>¿Emergencia?</strong> Si tu coche no funciona correctamente, no esperes. Ofrecemos servicio de urgencia para tu seguridad. Revisamos y reparamos inmediatamente.</span>
+                </div>
+                <div class="clarity-actions">
+                    <Button href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20mi%20coche%20tiene%20un%20problema%20mecánico.%20¿Podrían%20ayudarme?`} target="_blank">
+                        Consulta por WhatsApp
+                    </Button>
+                    <Button href={`tel:${WHATSAPP_NUMBER}`} variant="secondary">
+                        Llamar Ahora
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Icono Flotante de WhatsApp -->
+    <div class="whatsapp-float">
+        <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20necesito%20información%20sobre%20servicios%20mecánicos`} target="_blank" rel="noopener" class="whatsapp-button">
+            <i class='bx bxl-whatsapp'></i>
+            <span class="whatsapp-tooltip">¡Escríbenos por WhatsApp!</span>
+        </a>
+    </div>
+
+    <!-- Número de teléfono flotante -->
+    <div class="phone-float">
+        <a href={`tel:${WHATSAPP_NUMBER}`} class="phone-button">
+            <i class='bx bx-phone'></i>
+            <span class="phone-tooltip">Clic para llamar</span>
+        </a>
+    </div>
+</Layout>
+
+<style>
+    .page-section { 
+        padding: 5rem 0; 
+    }
+    
+    .benefits-section {
+        background-color: var(--color-surface-muted);
+    }
+    
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .benefit-card {
+        background: var(--color-surface-base);
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .benefit-icon {
+        font-size: 3rem;
+        color: var(--color-primary);
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--color-text-base);
+    }
+    
+    .benefit-card p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    .clarity-block { 
+        background-color: var(--color-surface-muted); 
+    }
+    
+    .clarity-content { 
+        max-width: 800px; 
+        margin: 0 auto; 
+        text-align: center; 
+        background-color: var(--color-surface-base); 
+        padding: 3rem; 
+        border-radius: 16px; 
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); 
+    }
+    
+    .clarity-icon { 
+        font-size: 3rem; 
+        color: var(--color-primary); 
+        margin-bottom: 1rem; 
+    }
+    
+    .clarity-content h3 { 
+        font-size: 2rem; 
+        margin-bottom: 1rem; 
+    }
+    
+    .clarity-content p { 
+        color: var(--color-text-muted); 
+        font-size: 1.1rem; 
+        line-height: 1.7; 
+        margin-bottom: 2rem; 
+    }
+    
+    .emergency-note {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #856404;
+        font-size: 0.95rem;
+    }
+    
+    .emergency-note i {
+        font-size: 1.2rem;
+        color: #f39c12;
+    }
+    
+    .clarity-actions { 
+        display: flex; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+        gap: 1rem; 
+    }
+
+    /* Botón flotante de WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .whatsapp-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: #25D366;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.8rem;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .whatsapp-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+    
+    .whatsapp-tooltip {
+        position: absolute;
+        right: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .whatsapp-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .whatsapp-button:hover .whatsapp-tooltip {
+        opacity: 1;
+    }
+
+    /* Botón flotante de teléfono */
+    .phone-float {
+        position: fixed;
+        bottom: 100px;
+        right: 25px;
+        z-index: 1000;
+    }
+    
+    .phone-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--color-primary);
+        border-radius: 50%;
+        color: var(--color-text-base);
+        font-size: 1.4rem;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(255, 210, 51, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .phone-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 210, 51, 0.6);
+    }
+    
+    .phone-tooltip {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-text-base);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .phone-tooltip::after {
+        content: '';
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 4px solid transparent;
+        border-left-color: var(--color-text-base);
+    }
+    
+    .phone-button:hover .phone-tooltip {
+        opacity: 1;
+    }
+
+    /* Animación pulsante para llamar la atención */
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    
+    .whatsapp-button {
+        animation: pulse 2s infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .benefits-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .benefits-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .clarity-content {
+            padding: 2rem;
+        }
+        
+        .clarity-actions {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .phone-float {
+            bottom: 90px;
+            right: 20px;
+        }
+        
+        .whatsapp-tooltip,
+        .phone-tooltip {
+            display: none; /* Ocultar tooltips en móvil para evitar problemas */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .benefit-card {
+            padding: 1.5rem;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.1rem;
+        }
+        
+        .benefit-card p {
+            font-size: 0.9rem;
+        }
+    }
+
+    .section-title {
+        font-size: clamp(2.2rem, 5vw, 3rem);
+        font-weight: 800;
+        color: var(--color-primary);
+        margin-bottom: 1.2rem;
+        letter-spacing: -0.01em;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        text-align: center;
+    }
+    .section-subtitle {
+        font-size: 1.25rem;
+        color: var(--color-text-base);
+        opacity: 0.92;
+        max-width: 600px;
+        margin: 0 auto 0.5rem auto;
+        line-height: 1.6;
+        font-weight: 500;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.04);
+        text-align: center;
+    }
+</style> 
