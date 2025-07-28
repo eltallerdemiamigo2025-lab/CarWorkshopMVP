@@ -5,6 +5,7 @@ import LinkButton from "@/components/ui/LinkButton.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCard from "@/components/home/ServiceCard";
 import homeBackground from "@/assets/homebackground4.png";
+import backgroundMobile from "@/assets/backgroundmobile.png";
 import paso1 from "@/assets/logos/paso1.png";
 import paso2 from "@/assets/logos/paso2.png";
 import paso3 from "@/assets/logos/paso3.png";
@@ -17,7 +18,18 @@ import paso4 from "@/assets/logos/paso4.png";
 >
   <!-- Hero Section with Background -->
   <section class="w-dvw relative" style={{ height: 'calc(100dvh - 80px)'}}>
-    <img src={homeBackground.src} class="absolute inset-0 w-full h-full object-cover" />
+    <!-- Desktop background -->
+    <img 
+      src={homeBackground.src} 
+      class="absolute inset-0 w-full h-full object-cover hero-bg-desktop" 
+      alt="Background desktop"
+    />
+    <!-- Mobile background -->
+    <img 
+      src={backgroundMobile.src} 
+      class="absolute inset-0 w-full h-full object-cover hero-bg-mobile" 
+      alt="Background mobile"
+    />
     <div class="bg-black/60 absolute inset-0" />
     
     <!-- Contenedor centrado con flexbox -->
@@ -110,6 +122,25 @@ import paso4 from "@/assets/logos/paso4.png";
 <style>
   html {
     scroll-behavior: smooth;
+  }
+  
+  /* Background image switching for mobile */
+  .hero-bg-desktop {
+    display: block;
+  }
+  
+  .hero-bg-mobile {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-bg-desktop {
+      display: none;
+    }
+    
+    .hero-bg-mobile {
+      display: block;
+    }
   }
   
   /* Fallback para navegadores que no soporten scroll-behavior */
