@@ -17,35 +17,33 @@ import paso4 from "@/assets/logos/paso4.png";
   description="Servicio profesional de mantenimiento de vehículos con recogida y entrega en Madrid. Neumáticos, baterías, aceites. Primeras marcas y precios sin sorpresas."
 >
   <!-- Hero Section with Background -->
-  <section class="w-dvw relative" style={{ height: 'calc(100dvh - 80px)'}}>
+  <section class="min-h-screen w-full relative" style={{ height: 'calc(100dvh - 80px)'}}>
     <!-- Desktop background -->
-    <img 
-      src={homeBackground.src} 
-      class="absolute inset-0 w-full h-full object-cover hero-bg-desktop" 
-      alt="Background desktop"
-    />
+    <div 
+      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat md:block hidden"
+      style={{ backgroundImage: `url(${homeBackground.src})` }}
+    ></div>
     <!-- Mobile background -->
-    <img 
-      src={backgroundMobile.src} 
-      class="absolute inset-0 w-full h-full object-cover hero-bg-mobile" 
-      alt="Background mobile"
-    />
+    <div 
+      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat md:hidden block"
+      style={{ backgroundImage: `url(${backgroundMobile.src})` }}
+    ></div>
     <div class="bg-black/60 absolute inset-0" />
     
     <!-- Contenedor centrado con flexbox -->
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="text-white flex flex-col items-center px-4 py-8 max-w-5xl mx-auto">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl text-center font-semibold mb-4 sm:mb-6">
+    <div class="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div class="text-white flex flex-col items-center py-8 max-w-6xl mx-auto w-full">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center font-semibold mb-4 sm:mb-6 lg:mb-8 leading-tight">
           Recogemos, reparamos, entregamos
         </h1>
 
-        <p class="max-w-4xl text-base sm:text-lg text-center leading-relaxed mb-6 sm:mb-8">
+        <p class="max-w-4xl text-sm sm:text-base md:text-lg lg:text-xl text-center leading-relaxed mb-6 sm:mb-8 lg:mb-10 px-2">
           Recogemos su vehículo en su domicilio o empresa. Lo revisamos y
           reparamos en nuestro taller. <br class="hidden sm:block" /> 
           <span class="block sm:inline">Te lo entregamos de vuelta en su destino.</span>
         </p>
 
-        <article class="flex justify-center gap-2 flex-col sm:flex-row w-full sm:w-auto">
+        <article class="flex justify-center gap-3 sm:gap-4 flex-row w-full max-w-md sm:max-w-lg">
           <LinkButton href="#servicios" text="Ver servicios" />
           <WhatsappLinkButton href="/contacto" text="Contactar" />
         </article>
@@ -54,9 +52,9 @@ import paso4 from "@/assets/logos/paso4.png";
   </section>
 
   <!-- Rest of Content -->
-  <main class="flex flex-col items-end justify-center">
+  <main class="flex flex-col items-center justify-center">
     <article
-      class="max-w-6xl mx-auto mt-12 grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+      class="max-w-7xl mx-auto mt-16 sm:mt-20 lg:mt-24 px-4 sm:px-6 lg:px-8 grid gap-8 sm:gap-12 lg:gap-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
     >
       <FeatureSnippet
         title="Solicitud"
@@ -83,12 +81,12 @@ import paso4 from "@/assets/logos/paso4.png";
       />
     </article>
 
-    <article class="max-w-4xl mx-auto mt-24 mb-12">
-      <h2 class="text-3xl text-center font-semibold">
+    <article class="max-w-6xl mx-auto mt-20 sm:mt-24 lg:mt-32 mb-16 sm:mb-20 lg:mb-24 px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl text-center font-semibold mb-8 sm:mb-10 lg:mb-12">
         Descubre nuestros <span class="title-secondary">servicios</span>
       </h2>
 
-      <div id="servicios" class="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 scroll-mt-20">
+      <div id="servicios" class="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 scroll-mt-20">
         <ServiceCard
           title="Neumáticos"
           description="Cambio y equilibrado de neumáticos para una conducción segura y eficiente."
@@ -122,25 +120,6 @@ import paso4 from "@/assets/logos/paso4.png";
 <style>
   html {
     scroll-behavior: smooth;
-  }
-  
-  /* Background image switching for mobile */
-  .hero-bg-desktop {
-    display: block;
-  }
-  
-  .hero-bg-mobile {
-    display: none;
-  }
-  
-  @media (max-width: 768px) {
-    .hero-bg-desktop {
-      display: none;
-    }
-    
-    .hero-bg-mobile {
-      display: block;
-    }
   }
   
   /* Fallback para navegadores que no soporten scroll-behavior */
