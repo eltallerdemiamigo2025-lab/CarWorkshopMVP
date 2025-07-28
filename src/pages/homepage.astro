@@ -17,23 +17,27 @@ import paso4 from "@/assets/logos/paso4.png";
 >
   <!-- Hero Section with Background -->
   <section class="w-dvw relative" style={{ height: 'calc(100dvh - 80px)'}}>
-    <img src={homeBackground.src} class="absolute inset-0 object-cover" style={{height: 'calc(100dvh - 80px)'}} />
-    <div class="bg-black/60 absolute inset-0" style={{height: 'calc(100dvh - 80px)'}} />
+    <img src={homeBackground.src} class="absolute inset-0 w-full h-full object-cover" />
+    <div class="bg-black/60 absolute inset-0" />
     
-    <div class="text-white translate-y-0 pt-72 flex flex-col items-center">
-      <h1 class="text-4xl text-center font-semibold">
-        Recogemos, reparamos, entregamos
-      </h1>
+    <!-- Contenedor centrado con flexbox -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="text-white flex flex-col items-center px-4 py-8 max-w-5xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl text-center font-semibold mb-4 sm:mb-6">
+          Recogemos, reparamos, entregamos
+        </h1>
 
-      <p class="px-4 max-w-4xl mt-4 text-center">
-        Recogemos su vehículo en su domicilio o empresa. Lo revisamos y
-        reparamos en nuestro taller. <br /> Te lo entregamos de vuelta en su destino.
-      </p>
+        <p class="max-w-4xl text-base sm:text-lg text-center leading-relaxed mb-6 sm:mb-8">
+          Recogemos su vehículo en su domicilio o empresa. Lo revisamos y
+          reparamos en nuestro taller. <br class="hidden sm:block" /> 
+          <span class="block sm:inline">Te lo entregamos de vuelta en su destino.</span>
+        </p>
 
-      <article class="mt-8 flex justify-center gap-2">
-        <LinkButton href="#servicios" text="Ver servicios" />
-        <WhatsappLinkButton href="/contacto" text="Contactar" />
-      </article>
+        <article class="flex justify-center gap-2 flex-col sm:flex-row w-full sm:w-auto">
+          <LinkButton href="#servicios" text="Ver servicios" />
+          <WhatsappLinkButton href="/contacto" text="Contactar" />
+        </article>
+      </div>
     </div>
   </section>
 
@@ -72,7 +76,7 @@ import paso4 from "@/assets/logos/paso4.png";
         Descubre nuestros <span class="title-secondary">servicios</span>
       </h2>
 
-      <div id="servicios" class="mt-6 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3 servicios-scroll-anchor">
+      <div id="servicios" class="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 scroll-mt-20">
         <ServiceCard
           title="Neumáticos"
           description="Cambio y equilibrado de neumáticos para una conducción segura y eficiente."
@@ -102,3 +106,54 @@ import paso4 from "@/assets/logos/paso4.png";
     </article>
   </main>
 </Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Fallback para navegadores que no soporten scroll-behavior */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  
+  /* Para usuarios que prefieren movimiento reducido */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+</style>
+
+<script>
+  // Script adicional para asegurar compatibilidad en todos los navegadores
+  document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionar todos los enlaces que apuntan a anclas
+    const anchorLinks = document.querySelectorAll('a[href^="#"]') as NodeListOf<HTMLAnchorElement>;
+    
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', (e: Event) => {
+        const target = e.currentTarget as HTMLAnchorElement;
+        const href = target.getAttribute('href');
+        const targetElement = href ? document.querySelector(href) : null;
+        
+        if (targetElement) {
+          e.preventDefault();
+          
+          // Calcular la posición teniendo en cuenta el header
+          const headerOffset = 100; // Ajusta según la altura de tu header
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          // Desplazamiento suave
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
