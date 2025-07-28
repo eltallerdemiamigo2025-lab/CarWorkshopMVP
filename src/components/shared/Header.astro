@@ -3,7 +3,7 @@ const navLinks = [
     { href: '/', label: 'Inicio' },
     { href: '/neumaticos', label: 'Neumáticos' },
     { href: '/filtros', label: 'Aceites y Filtros' },
-    { href: '/baterias', label: 'Baterías' },
+    { href: '/baterias', label:'Baterías' },
     { href: '/frenos', label: 'Frenos' },
     { href: '/mecanica', label: 'Mecánica' },
 ];
@@ -47,10 +47,27 @@ const navLinks = [
         if (newNav) newNav.classList.remove('active');
         if (newMenuBtn) newMenuBtn.classList.remove('active');
         
+        // Función para controlar el scroll del body
+        function toggleBodyScroll(disable) {
+            if (disable) {
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+            } else {
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
+        }
+        
         if (newMenuBtn && newNav) {
             newMenuBtn.addEventListener('click', () => {
+                const isActive = newNav.classList.contains('active');
                 newNav.classList.toggle('active');
                 newMenuBtn.classList.toggle('active');
+                
+                // Controlar el scroll del body
+                toggleBodyScroll(!isActive);
             });
             
             // Cerrar al hacer clic en enlaces
@@ -59,6 +76,8 @@ const navLinks = [
                 link.addEventListener('click', () => {
                     newNav.classList.remove('active');
                     newMenuBtn.classList.remove('active');
+                    // Restaurar scroll del body
+                    toggleBodyScroll(false);
                 });
             });
         }
@@ -192,6 +211,11 @@ const navLinks = [
             z-index: 1001; /* Asegurar que esté por encima del menú */
         }
 
+        /* Cambiar color de la cruz cuando el menú está activo */
+        .menu-toggle.active span {
+            background-color: #FAFAFA; /* Color claro para contraste con el fondo oscuro */
+        }
+
         .nav-menu {
             position: fixed; /* Usar fixed para cubrir toda la pantalla */
             top: 0;
@@ -208,6 +232,9 @@ const navLinks = [
             opacity: 0;
             visibility: hidden;
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+            /* Prevenir scroll en el menú */
+            overflow: hidden;
+            touch-action: none;
         }
 
         .nav-menu.active {
