@@ -8,7 +8,7 @@ const navLinks = [
     { href: '/mecanica', label: 'Mecánica' },
 ];
 ---
-<header>
+<header class="auto-hide-header">
     <div class="container header-container">
         <a href="/homepage" class="logo">eltaller<span class="highlight">demiamigo</span>.com</a>
 
@@ -82,17 +82,77 @@ const navLinks = [
             });
         }
     }
+
+    // Función para el auto-hide del header
+    function initAutoHideHeader() {
+        const header = document.querySelector('.auto-hide-header');
+        if (!header) return;
+
+        let lastScrollTop = 0;
+        let scrollThreshold = 5; // Umbral mínimo de scroll para activar el comportamiento
+        let isHeaderHidden = false;
+
+        function handleScroll() {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Si estamos en la parte superior, siempre mostrar el header
+            if (currentScrollTop <= 10) {
+                header.classList.remove('header-hidden');
+                isHeaderHidden = false;
+                lastScrollTop = currentScrollTop;
+                return;
+            }
+
+            // Calcular la diferencia de scroll
+            const scrollDifference = Math.abs(currentScrollTop - lastScrollTop);
+            
+            // Solo proceder si el scroll supera el umbral
+            if (scrollDifference < scrollThreshold) {
+                return;
+            }
+
+            // Scroll hacia abajo - ocultar header
+            if (currentScrollTop > lastScrollTop && !isHeaderHidden) {
+                header.classList.add('header-hidden');
+                isHeaderHidden = true;
+            }
+            // Scroll hacia arriba - mostrar header
+            else if (currentScrollTop < lastScrollTop && isHeaderHidden) {
+                header.classList.remove('header-hidden');
+                isHeaderHidden = false;
+            }
+
+            lastScrollTop = currentScrollTop;
+        }
+
+        // Usar requestAnimationFrame para mejor rendimiento
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(handleScroll);
+                ticking = true;
+                setTimeout(() => { ticking = false; }, 16); // ~60fps
+            }
+        }
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+    }
     
     // Ejecutar al cargar la página
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMenu);
-    } else {
+    function initAll() {
         initMenu();
+        initAutoHideHeader();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+        initAll();
     }
     
     // Ejecutar en cada navegación de Astro
-    document.addEventListener('astro:page-load', initMenu);
-    document.addEventListener('astro:after-swap', initMenu);
+    document.addEventListener('astro:page-load', initAll);
+    document.addEventListener('astro:after-swap', initAll);
 </script>
 
 <style>
@@ -100,9 +160,22 @@ const navLinks = [
         background-color: var(--color-surface-base);
         padding: 1rem 0; /* Reducir padding para móviles */
         border-bottom: 1px solid var(--color-border);
-        position: sticky;
+        position: fixed; /* Cambiado de sticky a fixed */
         top: 0;
+        left: 0;
+        width: 100%;
         z-index: 1000;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Suave transición */
+    }
+
+    /* Estilo para cuando el header está oculto */
+    .header-hidden {
+        transform: translateY(-100%);
+    }
+
+    /* Agregar padding-top al body para compensar el header fixed */
+    body {
+        padding-top: 80px; /* Ajusta según el alto real de tu header */
     }
 
     .header-container {
@@ -220,6 +293,10 @@ const navLinks = [
         .header-container {
             padding: 0 2rem; /* Más padding lateral en desktop */
         }
+
+        body {
+            padding-top: 100px; /* Ajustar padding para desktop */
+        }
     }
 
     /* Responsive para tablets y móviles (usar menú hamburguesa) */
@@ -318,6 +395,10 @@ const navLinks = [
         .nav-menu ul {
             gap: 1.75rem; /* Espaciado intermedio */
         }
+
+        body {
+            padding-top: 90px; /* Ajustar padding para tablets */
+        }
     }
 
     /* Responsive para pantallas muy pequeñas (menores de 425px) */
@@ -359,6 +440,10 @@ const navLinks = [
         
         .nav-menu ul {
             gap: 1.5rem; /* Reducir espaciado entre elementos */
+        }
+
+        body {
+            padding-top: 70px; /* Ajustar padding para móviles pequeños */
         }
     }
 </style>
