@@ -30,19 +30,22 @@ import paso4 from "@/assets/logos/paso4.png";
     ></div>
     <div class="bg-black/60 absolute inset-0" />
     
-    <!-- Contenedor centrado con flexbox -->
-    <div class="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <!-- Contenedor centrado con flexbox - Ajustado más abajo -->
+    <div class="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8" style="padding-top: 8vh;">
       <div class="text-white flex flex-col items-center py-8 max-w-6xl mx-auto w-full mb-10">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center font-semibold mb-4 sm:mb-6 lg:mb-8 leading-tight">
+        <!-- Título con tamaños reducidos -->
+        <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center font-semibold mb-4 sm:mb-6 lg:mb-8 leading-tight">
           Recogemos, reparamos, entregamos
         </h1>
 
-        <p class="max-w-4xl text-sm sm:text-base md:text-lg lg:text-xl text-center leading-relaxed mb-6 sm:mb-8 lg:mb-10 px-2">
+        <!-- Párrafo con tamaños reducidos -->
+        <p class="max-w-4xl text-xs sm:text-sm md:text-base lg:text-lg text-center leading-relaxed mb-6 sm:mb-8 lg:mb-10 px-2">
           Recogemos su vehículo en su domicilio o empresa. Lo revisamos y
           reparamos en nuestro taller. <br class="hidden sm:block" /> 
           <span class="block sm:inline">Te lo entregamos de vuelta en su destino.</span>
         </p>
 
+        <!-- Botones manteniendo el tamaño original -->
         <article class="flex justify-center gap-3 sm:gap-4 flex-row w-full max-w-md sm:max-w-lg">
           <LinkButton href="#servicios" text="Ver servicios" />
           <WhatsappLinkButton href="/contacto" text="Contactar" />
