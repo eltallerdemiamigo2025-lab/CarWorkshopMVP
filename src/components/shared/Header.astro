@@ -1,6 +1,6 @@
 ---
 const navLinks = [
-    { href: '/', label: 'Inicio' },
+    { href: '/homepage', label: 'Inicio' },
     { href: '/neumaticos', label: 'Neumáticos' },
     { href: '/filtros', label: 'Aceites y Filtros' },
     { href: '/baterias', label:'Baterías' },
@@ -10,7 +10,7 @@ const navLinks = [
 ---
 <header>
     <div class="container header-container">
-        <a href="/" class="logo">eltaller<span class="highlight">demiamigo</span>.com</a>
+        <a href="/homepage" class="logo">eltaller<span class="highlight">demiamigo</span>.com</a>
 
         <button class="menu-toggle" aria-label="Abrir menú">
             <span></span>
@@ -98,7 +98,7 @@ const navLinks = [
 <style>
     header {
         background-color: var(--color-surface-base);
-        padding: 1.5rem 0; /* Aumentar padding vertical */
+        padding: 1rem 0; /* Reducir padding para móviles */
         border-bottom: 1px solid var(--color-border);
         position: sticky;
         top: 0;
@@ -109,14 +109,14 @@ const navLinks = [
         display: flex;
         justify-content: space-between;
         align-items: center;
-        max-width: 1600px; /* Aumentar max-width para más espacio */
-        margin: 0 auto; /* Centrar el contenedor */
-        padding: 0 1rem; /* Reducir padding horizontal */
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 1rem;
     }
 
     .logo {
         font-weight: 700;
-        font-size: 1.7rem; /* Aumentar tamaño de fuente */
+        font-size: 1.4rem; /* Reducir tamaño base para móviles */
         text-decoration: none;
         color: var(--color-text-base);
     }
@@ -131,20 +131,20 @@ const navLinks = [
         background: none;
         border: none;
         cursor: pointer;
-        padding: 0.5rem;
-        gap: 5px; /* Aumentar espacio */
+        padding: 0.25rem; /* Reducir padding para móviles */
+        gap: 4px; /* Reducir gap */
     }
 
     .menu-toggle span {
-        width: 28px; /* Hacerlo un poco más grande */
-        height: 3px;
+        width: 24px; /* Reducir tamaño para móviles */
+        height: 2.5px;
         background-color: var(--color-text-base);
         transition: all 0.3s ease-in-out;
         border-radius: 2px;
     }
 
     .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(6px, 6px);
+        transform: rotate(45deg) translate(5px, 5px); /* Ajustar para el nuevo tamaño */
     }
 
     .menu-toggle.active span:nth-child(2) {
@@ -152,11 +152,18 @@ const navLinks = [
     }
 
     .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -6px);
+        transform: rotate(-45deg) translate(5px, -5px); /* Ajustar para el nuevo tamaño */
     }
 
     nav {
         display: block;
+    }
+    
+    /* Ocultar menú normal en tablets y móviles */
+    @media (max-width: 1024px) {
+        nav {
+            display: none;
+        }
     }
 
     nav ul {
@@ -200,15 +207,30 @@ const navLinks = [
     }
 
 
-    /* Responsive para móviles */
-    @media (max-width: 768px) {
+    /* Responsive para pantallas grandes (desktop) */
+    @media (min-width: 1025px) {
+        header {
+            padding: 1.5rem 0; /* Más padding en desktop */
+        }
+        
+        .logo {
+            font-size: 1.7rem; /* Tamaño completo en desktop */
+        }
+        
         .header-container {
-            padding: 0 1.5rem; /* Ajustar padding para móviles */
+            padding: 0 2rem; /* Más padding lateral en desktop */
+        }
+    }
+
+    /* Responsive para tablets y móviles (usar menú hamburguesa) */
+    @media (max-width: 1024px) {
+        .header-container {
+            padding: 0 1rem;
         }
 
         .menu-toggle {
             display: flex;
-            z-index: 1001; /* Asegurar que esté por encima del menú */
+            z-index: 1001;
         }
 
         /* Cambiar color de la cruz cuando el menú está activo */
@@ -266,6 +288,77 @@ const navLinks = [
         .nav-menu a:hover {
             color: var(--color-primary);
             transform: scale(1.1);
+        }
+    }
+
+    /* Responsive específico para tablets (768px - 1024px) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .logo {
+            font-size: 1.6rem; /* Tamaño intermedio para tablets */
+        }
+        
+        .menu-toggle span {
+            width: 26px; /* Tamaño intermedio para tablets */
+            height: 2.5px;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5.5px, 5.5px);
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5.5px, -5.5px);
+        }
+        
+        .nav-menu a {
+            font-size: 1.75rem; /* Tamaño intermedio para tablets */
+            padding: 1rem 2rem;
+        }
+        
+        .nav-menu ul {
+            gap: 1.75rem; /* Espaciado intermedio */
+        }
+    }
+
+    /* Responsive para pantallas muy pequeñas (menores de 425px) */
+    @media (max-width: 425px) {
+        header {
+            padding: 0.75rem 0; /* Reducir aún más el padding */
+        }
+        
+        .header-container {
+            padding: 0 0.75rem; /* Reducir padding lateral */
+        }
+        
+        .logo {
+            font-size: 1.2rem; /* Reducir el tamaño del logo */
+            line-height: 1.2;
+        }
+        
+        .menu-toggle {
+            padding: 0.2rem; /* Reducir padding del botón */
+        }
+        
+        .menu-toggle span {
+            width: 20px; /* Hacer el menú hamburguesa más pequeño */
+            height: 2px;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+        
+        .nav-menu a {
+            font-size: 1.5rem; /* Reducir tamaño de fuente del menú */
+            padding: 0.75rem 1.5rem; /* Reducir padding */
+        }
+        
+        .nav-menu ul {
+            gap: 1.5rem; /* Reducir espaciado entre elementos */
         }
     }
 </style>
