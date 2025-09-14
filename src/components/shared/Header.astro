@@ -33,26 +33,26 @@ const navLinks = [
     function initMenu() {
         const menuBtn = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.nav-menu');
-        
+
         // Limpiar event listeners anteriores
         if (menuBtn) {
             menuBtn.replaceWith(menuBtn.cloneNode(true));
         }
-        
+
         // Obtener elementos frescos
         const newMenuBtn = document.querySelector('.menu-toggle');
         const newNav = document.querySelector('.nav-menu');
-        
+
         // Reset estado
         if (newNav) newNav.classList.remove('active');
         if (newMenuBtn) newMenuBtn.classList.remove('active');
-        
+
         if (newMenuBtn && newNav) {
             newMenuBtn.addEventListener('click', () => {
                 newNav.classList.toggle('active');
                 newMenuBtn.classList.toggle('active');
             });
-            
+
             // Cerrar al hacer clic en enlaces
             const links = newNav.querySelectorAll('a');
             links.forEach(link => {
@@ -63,14 +63,14 @@ const navLinks = [
             });
         }
     }
-    
+
     // Ejecutar al cargar la página
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMenu);
     } else {
         initMenu();
     }
-    
+
     // Ejecutar en cada navegación de Astro
     document.addEventListener('astro:page-load', initMenu);
     document.addEventListener('astro:after-swap', initMenu);

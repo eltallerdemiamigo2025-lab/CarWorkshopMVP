@@ -1,3 +1,94 @@
 ---
-return Astro.redirect('/homepage');
---- 
+import FeatureSnippet from "@/components/home/FeatureSnippet.astro";
+import WhatsappLinkButton from "@/components/ui/WhatsappLinkButton";
+import LinkButton from "@/components/ui/LinkButton.astro";
+import Layout from "@/layouts/Layout.astro";
+import ServiceCard from "@/components/home/ServiceCard";
+import homeBackground from "@/assets/homebackground4.png";
+import paso1 from "@/assets/logos/paso1.png";
+import paso2 from "@/assets/logos/paso2.png";
+import paso3 from "@/assets/logos/paso3.png";
+import paso4 from "@/assets/logos/paso4.png";
+---
+
+<Layout
+  title="El Taller de mi Amigo | Recogemos, Reparamos, Entregamos"
+  description="Servicio profesional de mantenimiento de vehículos con recogida y entrega en Madrid. Neumáticos, baterías, aceites. Primeras marcas y precios sin sorpresas."
+>
+  <!-- Hero Section with Background -->
+  <section class="w-dvw relative" style={{ height: 'calc(100dvh - 80px)'}}>
+    <img src={homeBackground.src} class="absolute inset-0 object-cover" style={{height: 'calc(100dvh - 80px)'}} />
+    <div class="bg-black/60 absolute inset-0" style={{height: 'calc(100dvh - 80px)'}} />
+    
+    <div class="text-white translate-y-0 pt-72 flex flex-col items-center">
+      <h1 class="text-4xl text-center font-semibold">
+        Recogemos, reparamos, entregamos
+      </h1>
+
+      <p class="px-4 max-w-4xl mt-4 text-center">
+        Recogemos su vehículo en su domicilio o empresa. Lo revisamos y
+        reparamos en nuestro taller. <br /> Te lo entregamos de vuelta en su destino.
+      </p>
+
+      <article class="mt-8 flex justify-center gap-2">
+        <LinkButton href="#servicios" text="Ver servicios" />
+        <WhatsappLinkButton href="/contacto" text="Contactar" />
+      </article>
+    </div>
+  </section>
+
+  <!-- Rest of Content -->
+  <main class="flex flex-col items-end justify-center">
+    <article
+      class="max-w-6xl mx-auto mt-12 grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+    >
+      <FeatureSnippet
+        title="Solicitud"
+        description="Solicita el servicio desde la comodidad de tu casa."
+        imageUrl={paso1.src}
+      />
+
+      <FeatureSnippet
+        title="Recogida"
+        description="Recogemos el vehículo en el momento y lugar que nos indiques."
+        imageUrl={paso2.src}
+      />
+
+      <FeatureSnippet
+        title="Reparación"
+        description="Reparamos el vehículo en nuestro taller y le hacemos una revisión general gratuita."
+        imageUrl={paso3.src}
+        imageSize="w-40"
+      />
+      <FeatureSnippet
+        title="Entrega"
+        description="Tras terminar, te lo entregamos en el momento y lugar que nos indiques."
+        imageUrl={paso4.src}
+      />
+    </article>
+
+    <article class="max-w-4xl mx-auto mt-24 mb-12">
+      <h2 class="text-3xl text-center font-semibold">
+        Descubre nuestros <span class="title-secondary">servicios</span>
+      </h2>
+
+      <div id="servicios" class="mt-6 grid grid-cols- gap-8 md:grid-cols-2 lg:grid-cols-3 servicios-scroll-anchor">
+        <ServiceCard
+          title="Neumáticos"
+          description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
+          icon="car"
+        />
+        <ServiceCard
+          title="Baterías"
+          description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
+          icon="battery"
+        />
+        <ServiceCard
+          title="Aceites y filtros"
+          description="Revisa y cambia el aceite de tu vehículo para un buen funcionamiento."
+          icon="fuel"
+        />
+      </div>
+    </article>
+  </main>
+</Layout>
