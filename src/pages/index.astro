@@ -19,17 +19,17 @@ import paso4 from "@/assets/logos/paso4.png";
   <!-- Hero Section with Background -->
   <section class="min-h-screen w-full relative" style={{ height: 'calc(100dvh - 80px)'}}>
     <!-- Desktop background -->
-    <div 
+    <div
       class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat md:block hidden"
       style={{ backgroundImage: `url(${homeBackground.src})` }}
     ></div>
     <!-- Mobile background -->
-    <div 
+    <div
       class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat md:hidden block"
       style={{ backgroundImage: `url(${backgroundMobile.src})` }}
     ></div>
     <div class="bg-black/60 absolute inset-0" />
-    
+
     <!-- Contenedor centrado con flexbox - Ajustado más abajo -->
     <div class="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8" style="padding-top: 8vh;">
       <div class="text-white flex flex-col items-center py-8 max-w-6xl mx-auto w-full mb-10">
@@ -41,7 +41,7 @@ import paso4 from "@/assets/logos/paso4.png";
         <!-- Párrafo con tamaños reducidos -->
         <p class="max-w-4xl text-xs sm:text-sm md:text-base lg:text-lg text-center leading-relaxed mb-6 sm:mb-8 lg:mb-10 px-2">
           Recogemos su vehículo en su domicilio o empresa. Lo revisamos y
-          reparamos en nuestro taller. <br class="hidden sm:block" /> 
+          reparamos en nuestro taller. <br class="hidden sm:block" />
           <span class="block sm:inline">Te lo entregamos de vuelta en su destino.</span>
         </p>
 
@@ -124,14 +124,14 @@ import paso4 from "@/assets/logos/paso4.png";
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Fallback para navegadores que no soporten scroll-behavior */
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
     }
   }
-  
+
   /* Para usuarios que prefieren movimiento reducido */
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -145,21 +145,21 @@ import paso4 from "@/assets/logos/paso4.png";
   document.addEventListener('DOMContentLoaded', () => {
     // Seleccionar todos los enlaces que apuntan a anclas
     const anchorLinks = document.querySelectorAll('a[href^="#"]') as NodeListOf<HTMLAnchorElement>;
-    
+
     anchorLinks.forEach(link => {
       link.addEventListener('click', (e: Event) => {
         const target = e.currentTarget as HTMLAnchorElement;
         const href = target.getAttribute('href');
         const targetElement = href ? document.querySelector(href) : null;
-        
+
         if (targetElement) {
           e.preventDefault();
-          
+
           // Calcular la posición teniendo en cuenta el header
           const headerOffset = 100; // Ajusta según la altura de tu header
           const elementPosition = targetElement.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
+
           // Desplazamiento suave
           window.scrollTo({
             top: offsetPosition,
