@@ -3,19 +3,34 @@ import { type ImageMetadata } from 'astro';
 import Button from '../ui/Button.astro';
 import 'boxicons/css/boxicons.min.css';
 
-// ... (la interfaz de props y la lógica de las estrellas no cambian)
-interface SocialProof { rating: number; reviewCount: number; }
-interface Props { 
-    title: string; 
-    subtitle: string; 
-    image: ImageMetadata; 
-    socialProof: SocialProof;
-    whatsappNumber?: string; // Número de WhatsApp opcional
+interface SocialProof {
+  rating?: number | string;
+  reviewCount?: number | string;
 }
-const { title, subtitle, image, socialProof, whatsappNumber = "34000000000" } = Astro.props;
-const fullStars = Math.floor(socialProof.rating);
-const hasHalfStar = socialProof.rating % 1 >= 0.5;
-const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+interface Props {
+  title: string;
+  subtitle: string;
+  image: ImageMetadata;
+  socialProof?: SocialProof;          // <- opcional
+  whatsappNumber?: string;
+}
+
+const {
+  title = '',
+  subtitle = '',
+  image,
+  socialProof = {},                   // <- default objeto vacío
+  whatsappNumber = '34000000000',
+} = Astro.props as Props;
+
+// Normaliza rating y reviewCount con defaults
+const ratingRaw = Number(socialProof?.rating ?? 0);
+const rating = Math.max(0, Math.min(5, isFinite(ratingRaw) ? ratingRaw : 0));
+const reviewCount = Number(socialProof?.reviewCount ?? 0);
+
+const fullStars = Math.floor(rating);
+const hasHalfStar = rating % 1 >= 0.5;
+const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
 ---
 
 <section class="hero-section" style={`background-image: url(${image.src})`}>
@@ -27,19 +42,17 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
     
     <div class="hero-actions">
         <Button href={`https://wa.me/${whatsappNumber}?text=Hola,%20necesito%20información%20sobre%20sus%20servicios`} target="_blank">Contactar por WhatsApp</Button>
-        <Button href="#servicios" variant="secondary">Ver Servicios</Button>
     </div>
 
     <div class="hero-social-proof">
-        <div class="stars" title={`Valoración: ${socialProof.rating} de 5 estrellas`}>
+        <div class="stars" title={`Valoración: ${rating} de 5 estrellas`}>
             {Array(fullStars).fill(0).map(() => <i class='bx bxs-star'></i>)}
             {hasHalfStar && <i class='bx bxs-star-half'></i>}
             {Array(emptyStars).fill(0).map(() => <i class='bx bx-star'></i>)}
         </div>
-        <p>
-            <strong>+{socialProof.reviewCount} reseñas</strong> nos avalan en Madrid
-        </p>
+    <p><strong>+{reviewCount} reseñas</strong> nos avalan en Madrid</p>
     </div>
+
   </div>
 </section>
 

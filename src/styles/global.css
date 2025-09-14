@@ -34,6 +34,12 @@
 @layer base {
   html {
     font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   .title-primary {

@@ -1,8 +1,9 @@
 ---
 import 'boxicons/css/boxicons.min.css';
+import type { ImageMetadata } from 'astro';
 
 interface ServicioItem {
-    icon: string;
+    icon: string | ImageMetadata;
     title: string;
     description: string;
 }
@@ -12,6 +13,24 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+// Función auxiliar para determinar si es un icono de Boxicons o un SVG importado
+function isBoxIcon(icon: string | ImageMetadata): icon is string {
+    return typeof icon === 'string';
+}
+
+// Función para obtener clases CSS específicas basadas en el nombre del archivo
+function getSvgClasses(icon: ImageMetadata): string {
+    const fileName = icon.src.split('/').pop()?.split('.')[0] || '';
+    let classes = 'svg-icon';
+    
+    // Agregar clase específica para el icono de dirección
+    if (fileName.includes('direccion') || fileName.includes('direction')) {
+        classes += ' svg-icon-large';
+    }
+    
+    return classes;
+}
 ---
 
 <section class="servicio-completo">
@@ -25,7 +44,11 @@ const { items } = Astro.props;
             {items.map(item => (
                 <div class="servicio-card">
                     <div class="servicio-icon">
-                        <i class={`bx ${item.icon}`}></i>
+                        {isBoxIcon(item.icon) ? (
+                            <i class={`bx ${item.icon}`}></i>
+                        ) : (
+                            <img src={item.icon.src} alt="" class={getSvgClasses(item.icon)} />
+                        )}
                     </div>
                     <div class="servicio-content">
                         <h3>{item.title}</h3>
@@ -48,6 +71,24 @@ const { items } = Astro.props;
 </section>
 
 <style>
+    .svg-icon {
+        width: 1em;
+        height: 1em;
+        font-size: inherit;
+        display: inline-block;
+        vertical-align: middle;
+        fill: currentColor;
+        color: inherit;
+    }
+
+    
+    .svg-icon-large {
+        width: 1.3em;
+        height: 1.3em;
+        /* O puedes usar un tamaño fijo si prefieres */
+        /* width: 32px; height: 32px; */
+    }
+
     .servicio-completo {
         padding: clamp(4rem, 10vw, 6rem) 0;
         background-color: var(--color-surface-muted);
