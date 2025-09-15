@@ -10,7 +10,7 @@ export default function ZoneServiceModal() {
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
 
-      // Mostrar cuando se ha bajado al 50% del documento
+      // Mostrar cuando se ha bajado al 25% del documento
       if (scrollTop + windowHeight >= docHeight / 4) {
         setShowBanner(true);
       }
@@ -20,34 +20,28 @@ export default function ZoneServiceModal() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Efecto para bloquear el scroll del body y ocultar el header cuando el modal está abierto
+  // Bloquear scroll del body cuando el modal está abierto
   useEffect(() => {
     if (isModalOpen) {
-      // Guardar la posición actual del scroll
       const scrollY = window.scrollY;
-      
-      // Bloquear el scroll del body
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-      
-      // Ocultar el header
+
       const header = document.querySelector('.auto-hide-header');
       if (header && header instanceof HTMLElement) {
         header.style.display = '';
       }
-      
+
       return () => {
-        // Restaurar el scroll cuando se cierra el modal
         const scrollY = document.body.style.top;
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.width = '';
         document.body.style.overflow = '';
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
-        
-        // Mostrar el header nuevamente
+
         const header = document.querySelector('.auto-hide-header');
         if (header && header instanceof HTMLElement) {
           header.style.display = '';
@@ -58,25 +52,25 @@ export default function ZoneServiceModal() {
 
   return (
     <>
-      {/* Banner que aparece al 50% */}
+      {/* Banner que aparece al 25% */}
       {showBanner && (
         <div
           className={`
-            fixed bottom-10 left-3 right-3 
-            md:left-8 md:right-8 
+            fixed bottom-4 left-3 right-3 
+            md:bottom-10 md:left-8 md:right-8 
             lg:left-8 lg:right-auto lg:w-96 
             bg-white rounded-lg shadow-lg border border-yellow-300 z-40 overflow-hidden
             transform transition-transform duration-500
-            ${showBanner ? "translate-x-0" : "-translate-x-full"}
+            ${showBanner ? "translate-y-0" : "translate-y-full"}
           `}
         >
-          <div className="flex items-center p-3 md:p-4">
+          <div className="flex items-center p-2 md:p-4">
             {/* Texto lado izquierdo */}
-            <div className="flex-1 pr-3">
+            <div className="flex-1 pr-2 md:pr-3">
               <p className="text-sm md:text-base font-semibold text-gray-800">
                 Zonas de servicio
               </p>
-              <p className="text-xs md:text-sm text-gray-600 mt-1">
+              <p className="text-xs md:text-sm text-gray-600 mt-1 leading-snug">
                 Trabajamos en la zona sur de la Comunidad de Madrid
               </p>
             </div>
@@ -84,7 +78,7 @@ export default function ZoneServiceModal() {
             {/* Mapa miniatura lado derecho */}
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex-shrink-0 w-24 h-20 md:w-28 md:h-24 rounded overflow-hidden hover:opacity-90 transition-opacity cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              className="flex-shrink-0 w-20 h-16 md:w-28 md:h-24 rounded overflow-hidden hover:opacity-90 transition-opacity cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400"
               aria-label="Ver mapa completo de zonas de servicio"
             >
               <img 
@@ -104,12 +98,7 @@ export default function ZoneServiceModal() {
           onClick={() => setIsModalOpen(false)}
         >
           <div 
-            className="relative bg-white rounded-xl w-full flex flex-col"
-            style={{ 
-              maxWidth: '900px',
-              maxHeight: '85vh',
-              height: 'auto'
-            }}
+            className="relative bg-white rounded-xl w-full max-w-full md:max-w-3xl flex flex-col h-[90vh] md:h-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header del modal */}
@@ -135,35 +124,34 @@ export default function ZoneServiceModal() {
               </div>
             </div>
             
-            {/* Contenido del modal - sin scroll necesario */}
-            <div className="bg-gray-50 p-3 md:p-5 rounded-b-xl">
+            {/* Contenido del modal con scroll en móvil */}
+            <div className="bg-gray-50 p-3 md:p-5 rounded-b-xl overflow-y-auto">
               {/* Mapa con tamaño controlado */}
-              <div className="w-full" style={{ maxHeight: '50vh' }}>
+              <div className="w-full">
                 <img 
                   src="/map-zones.jpg" 
                   alt="Mapa detallado de zonas de servicio en Madrid"
-                  className="w-full h-full object-contain rounded-lg shadow-md"
-                  style={{ maxHeight: '50vh' }}
+                  className="w-full h-auto max-h-[40vh] md:max-h-[50vh] object-contain rounded-lg shadow-md"
                 />
               </div>
               
               {/* Información adicional */}
               <div className="mt-3 md:mt-4 p-3 md:p-4 bg-white rounded-lg">
-                <div className="grid grid-cols-3 gap-2 md:gap-4 text-center">
+                <div className="grid grid-cols-3 gap-2 md:gap-4 text-center text-xs md:text-sm">
                   <div>
                     <div className="text-xl md:text-2xl font-bold text-yellow-500">📍</div>
-                    <p className="text-xs md:text-sm font-semibold mt-0.5 md:mt-1">Madrid Capital</p>
-                    <p className="text-xs text-gray-600">Zona sur</p>
+                    <p className="font-semibold mt-0.5 md:mt-1">Madrid Capital</p>
+                    <p className="text-gray-600">Zona sur</p>
                   </div>
                   <div>
                     <div className="text-xl md:text-2xl font-bold text-yellow-500">🚗</div>
-                    <p className="text-xs md:text-sm font-semibold mt-0.5 md:mt-1">Recogida Gratuita</p>
-                    <p className="text-xs text-gray-600">En tu domicilio</p>
+                    <p className="font-semibold mt-0.5 md:mt-1">Recogida Gratuita</p>
+                    <p className="text-gray-600">En tu domicilio</p>
                   </div>
                   <div>
                     <div className="text-xl md:text-2xl font-bold text-yellow-500">⏰</div>
-                    <p className="text-xs md:text-sm font-semibold mt-0.5 md:mt-1">Horario Flexible</p>
-                    <p className="text-xs text-gray-600">Adaptado a ti</p>
+                    <p className="font-semibold mt-0.5 md:mt-1">Horario Flexible</p>
+                    <p className="text-gray-600">Adaptado a ti</p>
                   </div>
                 </div>
               </div>
