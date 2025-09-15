@@ -52,17 +52,27 @@ export default function ZoneServiceModal() {
 
   return (
     <>
-      {/* Banner que aparece al 25% */}
+      {/* Banner que aparece al 25% - AHORA TODO ES CLICKABLE */}
       {showBanner && (
         <div
+          onClick={() => setIsModalOpen(true)}
           className={`
             fixed bottom-4 left-3 right-3 
             md:bottom-10 md:left-8 md:right-8 
             lg:left-8 lg:right-auto lg:w-96 
             bg-white rounded-lg shadow-lg border border-yellow-300 z-40 overflow-hidden
-            transform transition-transform duration-500
+            transform transition-transform duration-500 cursor-pointer hover:shadow-xl hover:border-yellow-400 hover:scale-105 transition-all
             ${showBanner ? "translate-y-0" : "translate-y-full"}
           `}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setIsModalOpen(true);
+            }
+          }}
+          aria-label="Ver mapa completo de zonas de servicio"
         >
           <div className="flex items-center p-2 md:p-4">
             {/* Texto lado izquierdo */}
@@ -71,22 +81,18 @@ export default function ZoneServiceModal() {
                 Zonas de servicio
               </p>
               <p className="text-xs md:text-sm text-gray-600 mt-1 leading-snug">
-                Trabajamos en la zona sur de la Comunidad de Madrid
+                Haz click para ver el mapa completo
               </p>
             </div>
             
-            {/* Mapa miniatura lado derecho */}
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="flex-shrink-0 w-20 h-16 md:w-28 md:h-24 rounded overflow-hidden hover:opacity-90 transition-opacity cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              aria-label="Ver mapa completo de zonas de servicio"
-            >
+            {/* Mapa miniatura lado derecho - YA NO TIENE onClick PROPIO */}
+            <div className="flex-shrink-0 w-20 h-16 md:w-28 md:h-24 rounded overflow-hidden">
               <img 
                 src="/map-zones.jpg" 
                 alt="Mapa de zonas de servicio"
                 className="w-full h-full object-cover"
               />
-            </button>
+            </div>
           </div>
         </div>
       )}
