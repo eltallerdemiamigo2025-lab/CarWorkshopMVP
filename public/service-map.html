@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zonas de Servicio - Móstoles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 280px;
+        }
+
+        .map-overlay h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .service-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .service-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .active-zone {
+            background-color: #27ae60;
+        }
+
+        .coverage-area {
+            background-color: #3498db;
+        }
+
+        .map-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .zoom-controls button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #3498db;
+            color: white;
+            border-radius: 4px;
+            margin: 2px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .zoom-controls button:hover {
+            background: #2980b9;
+        }
+
+        /* Estilo para cuando se usa como minimapa */
+        .minimap {
+            width: 300px;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .minimap .map-overlay {
+            top: 10px;
+            left: 10px;
+            padding: 8px 12px;
+            max-width: 200px;
+        }
+
+        .minimap .map-overlay h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .minimap .service-info {
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .minimap .map-controls {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container" id="mapContainer">
+        <div class="map-overlay">
+            <h3>Zonas de Servicio Activas</h3>
+            <div class="service-info">
+                <div class="service-indicator active-zone"></div>
+                <span>Zona Principal de Servicio</span>
+            </div>
+            <div class="service-info">
+                <div class="service-indicator coverage-area"></div>
+                <span>Área de Cobertura Extendida</span>
+            </div>
+        </div>
+        
+        <div id="map"></div>
+        
+        <div class="map-controls">
+            <div class="zoom-controls">
+                <button onclick="zoomIn()">+</button>
+                <button onclick="zoomOut()">-</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let map;
+        let serviceAreaPolygon;
+        let extendedAreaPolygon;
+
+        // Coordenadas de Móstoles y áreas de servicio
+        const mostoles = { lat: 40.3217, lng: -3.8651 };
+        
+        // Define las zonas de servicio (puedes ajustar estas coordenadas según tus necesidades)
+        const mainServiceArea = [
+            { lat: 40.3350, lng: -3.8850 },
+            { lat: 40.3350, lng: -3.8450 },
+            { lat: 40.3100, lng: -3.8450 },
+            { lat: 40.3100, lng: -3.8850 }
+        ];
+
+        const extendedServiceArea = [
+            { lat: 40.3450, lng: -3.9000 },
+            { lat: 40.3450, lng: -3.8300 },
+            { lat: 40.2950, lng: -3.8300 },
+            { lat: 40.2950, lng: -3.9000 }
+        ];
+
+        function initMap() {
+            // Detectar si se está usando como minimapa
+            const urlParams = new URLSearchParams(window.location.search);
+            const isMinimap = urlParams.get('minimap') === 'true';
+            
+            if (isMinimap) {
+                document.getElementById('mapContainer').classList.add('minimap');
+            }
+
+            // Inicializar el mapa
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: mostoles,
+                mapTypeId: 'roadmap',
+                styles: [
+                    {
+                        featureType: 'all',
+                        elementType: 'geometry.fill',
+                        stylers: [{ saturation: -10 }, { lightness: 30 }]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'geometry.fill',
+                        stylers: [{ color: '#b3d1ff' }]
+                    }
+                ],
+                disableDefaultUI: isMinimap,
+                zoomControl: !isMinimap,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: !isMinimap
+            });
+
+            // Crear polígono para la zona principal de servicio
+            serviceAreaPolygon = new google.maps.Polygon({
+                paths: mainServiceArea,
+                strokeColor: '#27ae60',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#27ae60',
+                fillOpacity: 0.25,
+                map: map
+            });
+
+            // Crear polígono para el área de cobertura extendida
+            extendedAreaPolygon = new google.maps.Polygon({
+                paths: extendedServiceArea,
+                strokeColor: '#3498db',
+                strokeOpacity: 0.6,
+                strokeWeight: 2,
+                fillColor: '#3498db',
+                fillOpacity: 0.15,
+                map: map
+            });
+
+            // Marcador en el centro de Móstoles
+            const centerMarker = new google.maps.Marker({
+                position: mostoles,
+                map: map,
+                title: 'Móstoles - Centro de Operaciones',
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 8,
+                    fillColor: '#e74c3c',
+                    fillOpacity: 1,
+                    strokeColor: '#c0392b',
+                    strokeWeight: 2
+                }
+            });
+
+            // Info window para el marcador central
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div style="padding: 10px; font-family: Arial, sans-serif;">
+                        <h4 style="margin: 0 0 8px 0; color: #2c3e50;">Centro de Operaciones</h4>
+                        <p style="margin: 0; color: #555; font-size: 14px;">Móstoles, Madrid</p>
+                        <p style="margin: 5px 0 0 0; color: #27ae60; font-size: 12px; font-weight: bold;">✓ Servicio Activo</p>
+                    </div>
+                `
+            });
+
+            centerMarker.addListener('click', () => {
+                infoWindow.open(map, centerMarker);
+            });
+
+            // Añadir marcadores adicionales en puntos clave
+            addServicePoints();
+        }
+
+        function addServicePoints() {
+            const servicePoints = [
+                { lat: 40.3300, lng: -3.8700, name: 'Zona Norte' },
+                { lat: 40.3150, lng: -3.8500, name: 'Zona Centro' },
+                { lat: 40.3200, lng: -3.8800, name: 'Zona Oeste' }
+            ];
+
+            servicePoints.forEach(point => {
+                new google.maps.Marker({
+                    position: { lat: point.lat, lng: point.lng },
+                    map: map,
+                    title: point.name,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 6,
+                        fillColor: '#27ae60',
+                        fillOpacity: 0.8,
+                        strokeColor: '#1e8449',
+                        strokeWeight: 1
+                    }
+                });
+            });
+        }
+
+        function zoomIn() {
+            const currentZoom = map.getZoom();
+            map.setZoom(currentZoom + 1);
+        }
+
+        function zoomOut() {
+            const currentZoom = map.getZoom();
+            map.setZoom(currentZoom - 1);
+        }
+
+        // Función para redimensionar el mapa cuando cambie el tamaño del contenedor
+        function resizeMap() {
+            if (map) {
+                google.maps.event.trigger(map, 'resize');
+                map.setCenter(mostoles);
+            }
+        }
+
+        window.addEventListener('resize', resizeMap);
+    </script>
+
+    <!-- Cargar la API de Google Maps -->
+    <!-- IMPORTANTE: Reemplaza 'TU_API_KEY' con tu clave real de Google Maps API -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap&language=es&region=ES">
+    </script>
+</body>
+</html>

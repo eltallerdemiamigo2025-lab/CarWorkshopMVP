@@ -4,6 +4,8 @@ import Hero from '../components/sections/Hero.astro';
 import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
 import heroImageFrenos from '../assets/herofrenos.jpg'; // Using existing image for now
 import Button from '../components/ui/Button.astro';
+import ZoneServiceModal from '../components/ui/ZoneServiceModal';
+
 
 // --- DATOS CENTRALIZADOS PARA LA PÁGINA DE FRENOS ---
 
@@ -134,6 +136,7 @@ const marcasPrincipales = [
             <span class="phone-tooltip">Clic para llamar</span>
         </a>
     </div>
+    <ZoneServiceModal client:load />
 </Layout>
 
 <style>

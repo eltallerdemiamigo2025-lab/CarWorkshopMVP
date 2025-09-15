@@ -4,6 +4,8 @@ import Hero from '../components/sections/Hero.astro';
 import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
 import heroImageAceites from '../assets/heroaceites2.jpg'; // Asegúrate de tener esta imagen
 import Button from '../components/ui/Button.astro';
+import ZoneServiceModal from '../components/ui/ZoneServiceModal';
+
 
 // --- DATOS CENTRALIZADOS PARA LA PÁGINA DE ACEITES --- (ES PAGINA DE ACEITES, NO FILTROS)
 
@@ -166,6 +168,7 @@ const marcasPrincipales = [
             <span class="phone-tooltip">Clic para llamar</span>
         </a>
     </div>
+    <ZoneServiceModal client:load />
 </Layout>
 
 <style>

@@ -2,6 +2,7 @@
 import Header from '@/components/shared/Header.astro';
 import Footer from '@/components/shared/Footer.astro';
 import WhatsappFloat from '@/components/shared/WhatsappFloat.astro';
+import ServiceAreaModal from '@/components/ui/ZoneServiceModal'; // ← linea del minimapa
 
 interface Props {
 	title: string;
@@ -33,6 +34,7 @@ const canonicalURL = Astro.site
 		</main>
 		<Footer />
 		<WhatsappFloat />
+		<ServiceAreaModal client:load /> <!-- ← línea del mapa -->
 	</body>
 </html>
 

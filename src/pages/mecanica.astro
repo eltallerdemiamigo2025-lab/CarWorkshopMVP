@@ -4,6 +4,8 @@ import Hero from '../components/sections/Hero.astro';
 import SelectorMarcas from '../components/sections/SelectorMarcas.astro';
 import heroImageMecanica from '../assets/heromecanica.jpg'; // Using existing image for now
 import Button from '../components/ui/Button.astro';
+import ZoneServiceModal from '../components/ui/ZoneServiceModal';
+
 
 // --- DATOS CENTRALIZADOS PARA LA PÁGINA DE MECÁNICA ---
 
@@ -148,6 +150,7 @@ const garantiaItems = [
             <span class="phone-tooltip">Clic para llamar</span>
         </a>
     </div>
+    <ZoneServiceModal client:load />
 </Layout>
 
 <style>
