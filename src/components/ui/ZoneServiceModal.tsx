@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ZoneServiceModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
