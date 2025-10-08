@@ -137,7 +137,7 @@ import paso4 from "@/assets/logos/paso4.png";
 
           <!-- Mapa - Derecha -->
           <div class="bg-white rounded-2xl p-4 shadow-lg">
-            <div id="service-map" class="w-full h-80 sm:h-96 rounded-xl"></div>
+            <img src="/map-zones.jpg" alt="Mapa de zonas de servicio" class="w-full h-80 sm:h-96 rounded-xl object-cover" />
           </div>
         </div>
       </div>
@@ -200,14 +200,7 @@ import paso4 from "@/assets/logos/paso4.png";
   }
 </style>
 
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-  declare const L: any;
   // Script adicional para asegurar compatibilidad en todos los navegadores
   document.addEventListener('DOMContentLoaded', () => {
     // Seleccionar todos los enlaces que apuntan a anclas
@@ -235,53 +228,5 @@ import paso4 from "@/assets/logos/paso4.png";
         }
       });
     });
-
-    // Inicializar el mapa de zonas de servicio
-    const mapElement = document.getElementById('service-map');
-    if (mapElement) {
-      // Coordenadas del centro de Madrid (aproximadamente entre todas las zonas)
-      const centerLat = 40.3833;
-      const centerLng = -3.8167;
-      
-      // Crear el mapa
-      const map = L.map('service-map').setView([centerLat, centerLng], 11);
-      
-      // Añadir capa de mapa (OpenStreetMap)
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-
-      // Zonas de servicio con sus coordenadas
-      const serviceAreas = [
-        { name: 'Majadahonda', lat: 40.4734, lng: -3.8704 },
-        { name: 'Boadilla del Monte', lat: 40.4069, lng: -3.8772 },
-        { name: 'Pozuelo de Alarcón', lat: 40.4338, lng: -3.8123 },
-        { name: 'Alcorcón', lat: 40.3458, lng: -3.8258 },
-        { name: 'Leganés', lat: 40.3272, lng: -3.7637 },
-        { name: 'Getafe', lat: 40.3057, lng: -3.7327 },
-        { name: 'Arroyomolinos', lat: 40.2714, lng: -3.9181 }
-      ];
-
-      // Crear un icono personalizado
-      const customIcon = L.divIcon({
-        className: 'custom-marker',
-        html: '<div style="background-color: #3b82f6; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
-        iconSize: [16, 16],
-        iconAnchor: [8, 8]
-      });
-
-      // Añadir marcadores para cada zona
-      serviceAreas.forEach(area => {
-        L.marker([area.lat, area.lng], { icon: customIcon })
-          .bindPopup(`<strong>${area.name}</strong><br>Zona de servicio`)
-          .addTo(map);
-      });
-
-      // Ajustar el zoom para mostrar todas las zonas
-      const group = new L.featureGroup(
-        serviceAreas.map(area => L.marker([area.lat, area.lng]))
-      );
-      map.fitBounds(group.getBounds().pad(0.1));
-    }
   });
 </script>
