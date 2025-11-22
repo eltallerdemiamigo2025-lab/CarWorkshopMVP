@@ -33,7 +33,17 @@ const hasHalfStar = rating % 1 >= 0.5;
 const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
 ---
 
-<section class="hero-section" style={`background-image: url(${image.src})`}>
+<section class="hero-section">
+  <picture class="hero-bg" aria-hidden="true">
+    <img
+      src={image.src}
+      alt=""
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      class="hero-bg-image"
+    />
+  </picture>
   <div class="hero-overlay"></div>
   
   <div class="container hero-content">
@@ -66,10 +76,25 @@ const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
         margin-right: -50vw;
         padding: clamp(6rem, 15vw, 10rem) 0;
         text-align: center;
-        background-size: cover;
-        background-position: center center;
         color: var(--color-text-inverse);
         overflow: hidden;
+        background-color: #0f1114;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .hero-bg-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .hero-overlay {
