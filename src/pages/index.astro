@@ -10,6 +10,8 @@ import paso1 from "@/assets/logos/paso1.png";
 import paso2 from "@/assets/logos/paso2.png";
 import paso3 from "@/assets/logos/paso3.png";
 import paso4 from "@/assets/logos/paso4.png";
+
+const WHATSAPP_NUMBER = "34625722122";
 ---
 
 <Layout
@@ -48,7 +50,10 @@ import paso4 from "@/assets/logos/paso4.png";
         <!-- Botones manteniendo el tamaño original -->
         <article class="flex justify-center gap-3 sm:gap-4 flex-row w-full max-w-md sm:max-w-lg">
           <LinkButton href="#servicios" text="Ver servicios" />
-          <WhatsappLinkButton href="/contacto" text="Contactar" />
+          <WhatsappLinkButton
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20quiero%20más%20información%20sobre%20vuestros%20servicios`}
+            text="Contactar"
+          />
         </article>
       </div>
     </div>
