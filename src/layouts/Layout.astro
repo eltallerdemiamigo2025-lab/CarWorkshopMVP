@@ -35,8 +35,8 @@ const canonicalURL = Astro.site
 		</main>
 		<Footer />
 		<WhatsappFloat />
-		{Astro.url.pathname !== '/' && <ServiceAreaModal client:load />} <!-- ← línea del pop-up en todas las pages menos index.astro -->
-	</body>
+                {Astro.url.pathname !== '/' && <ServiceAreaModal client:idle />} <!-- ← línea del pop-up en todas las pages menos index.astro -->
+        </body>
 </html>
 
 <style is:global>

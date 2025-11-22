@@ -66,6 +66,7 @@ const marcasConfianza = [
         title={heroData.title}
         subtitle={heroData.subtitle}
         image={heroData.image}
+        imageAlt={heroData.imageAlt}
         socialProof={socialProofData}
         whatsappNumber={WHATSAPP_NUMBER}
     />
@@ -80,7 +81,15 @@ const marcasConfianza = [
             
             <div class="medidas-content">
                 <div class="medidas-image">
-                    <img src={neumatico_medidas.src} alt="Explicación visual de cómo leer las medidas de un neumático 215/65R15 95V" class="neumatico-img" />
+                    <img
+                        src={neumatico_medidas.src}
+                        alt="Explicación visual de cómo leer las medidas de un neumático 215/65R15 95V"
+                        width={neumatico_medidas.width}
+                        height={neumatico_medidas.height}
+                        loading="lazy"
+                        decoding="async"
+                        class="neumatico-img"
+                    />
                 </div>
                 
                 <div class="medidas-explicacion">

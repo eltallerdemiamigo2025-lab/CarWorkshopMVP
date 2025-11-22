@@ -32,45 +32,65 @@ function getHref(icon: Props['icon']): string {
 function getIcon(icon: Props['icon']): React.ReactNode {
   switch (icon) {
     case 'car':
-      return (
-        <img
-          src={tireLogo.src}
-          alt="Neumáticos"
-          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
-        />
-      );
+        return (
+          <img
+            src={tireLogo.src}
+            alt="Neumáticos"
+            width={64}
+            height={64}
+            loading="lazy"
+            decoding="async"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+          />
+        );
     case 'battery':
-      return (
-        <img
-          src={batteryLogo.src}
-          alt="Batería"
-          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
-        />
-      );
+        return (
+          <img
+            src={batteryLogo.src}
+            alt="Batería"
+            width={64}
+            height={64}
+            loading="lazy"
+            decoding="async"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+          />
+        );
     case 'fuel':
-      return (
-        <img
-          src={fuelLogo.src}
-          alt="Aceite y Filtros"
-          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
-        />
-      );
+        return (
+          <img
+            src={fuelLogo.src}
+            alt="Aceite y Filtros"
+            width={64}
+            height={64}
+            loading="lazy"
+            decoding="async"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+          />
+        );
     case 'brakes':
-      return (
-        <img
-          src={brakesLogo.src}
-          alt="Frenos"
-          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
-        />
-      );
+        return (
+          <img
+            src={brakesLogo.src}
+            alt="Frenos"
+            width={64}
+            height={64}
+            loading="lazy"
+            decoding="async"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+          />
+        );
     case 'mechanic':
-      return (
-        <img
-          src={mechanicLogo.src}
-          alt="Mecánica"
-          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
-        />
-      );
+        return (
+          <img
+            src={mechanicLogo.src}
+            alt="Mecánica"
+            width={64}
+            height={64}
+            loading="lazy"
+            decoding="async"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+          />
+        );
   }
 }
 

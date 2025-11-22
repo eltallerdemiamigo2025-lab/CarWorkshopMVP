@@ -1,5 +1,5 @@
 ---
-import { type ImageMetadata } from 'astro';
+import { Image, type ImageMetadata } from 'astro:assets';
 import Button from '../ui/Button.astro';
 import 'boxicons/css/boxicons.min.css';
 
@@ -11,6 +11,7 @@ interface Props {
   title: string;
   subtitle: string;
   image: ImageMetadata;
+  imageAlt?: string;
   socialProof?: SocialProof;          // <- opcional
   whatsappNumber?: string;
 }
@@ -19,6 +20,7 @@ const {
   title = '',
   subtitle = '',
   image,
+  imageAlt = '',
   socialProof = {},                   // <- default objeto vacío
   whatsappNumber = '34625722122',
 } = Astro.props as Props;
@@ -34,16 +36,19 @@ const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
 ---
 
 <section class="hero-section">
-  <picture class="hero-bg" aria-hidden="true">
-    <img
-      src={image.src}
-      alt=""
+  <div class="hero-bg" aria-hidden="true">
+    <Image
+      src={image}
+      alt={imageAlt || ''}
+      widths={[640, 960, 1280, 1920]}
+      sizes="100vw"
+      formats={["avif", "webp", "jpeg"]}
       loading="eager"
       decoding="async"
       fetchpriority="high"
       class="hero-bg-image"
     />
-  </picture>
+  </div>
   <div class="hero-overlay"></div>
   
   <div class="container hero-content">
@@ -180,8 +185,14 @@ const emptyStars = Math.max(0, 5 - fullStars - (hasHalfStar ? 1 : 0));
     .stars .bx-star { color: rgba(255, 255, 255, 0.4); }
 
     @keyframes fadeIn { 
-        from { opacity: 0; transform: translateY(20px); } 
-        to { opacity: 1; transform: translateY(0); } 
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .hero-content {
+            animation: none;
+        }
     }
 
     /* Responsive para móviles */
