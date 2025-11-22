@@ -1,3 +1,5 @@
+const WHATSAPP_NUMBER = "34625722122";
+
 // Custom WhatsApp icon component since lucide-react doesn't have one
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -10,9 +12,9 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export default function WhatsappLinkButton({ href, text }: { href: string, text: string }) {
+export default function WhatsappLinkButton({ href = `https://wa.me/${WHATSAPP_NUMBER}`, text }: { href?: string; text: string }) {
   return (
-    <a href={href}>
+    <a href={href} target="_blank" rel="noopener noreferrer">
       <div className="px-5 py-3 bg-green-500 hover:bg-green-600 transition-colors rounded-lg w-fit flex gap-2 items-center">
         <WhatsAppIcon className="w-4 h-4 text-white" />
 
