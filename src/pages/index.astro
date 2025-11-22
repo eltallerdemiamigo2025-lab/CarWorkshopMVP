@@ -18,18 +18,37 @@ const WHATSAPP_NUMBER = "34625722122";
   title="El Taller de mi Amigo | Recogemos, Reparamos, Entregamos"
   description="Servicio profesional de mantenimiento de vehículos con recogida y entrega en Madrid. Neumáticos, baterías, aceites. Primeras marcas y precios sin sorpresas."
 >
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={homeBackground.src}
+      media="(min-width: 768px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={backgroundMobile.src}
+      media="(max-width: 767px)"
+      fetchpriority="high"
+    />
+  </Fragment>
+
   <!-- Hero Section with Background -->
   <section class="min-h-screen w-full relative" style={{ height: 'calc(100dvh - 80px)'}}>
-    <!-- Desktop background -->
-    <div
-      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat md:block hidden"
-      style={{ backgroundImage: `url(${homeBackground.src})` }}
-    ></div>
-    <!-- Mobile background -->
-    <div
-      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat md:hidden block"
-      style={{ backgroundImage: `url(${backgroundMobile.src})` }}
-    ></div>
+    <picture class="absolute inset-0 w-full h-full">
+      <source srcset={homeBackground.src} media="(min-width: 768px)" />
+      <source srcset={backgroundMobile.src} media="(max-width: 767px)" />
+      <img
+        src={homeBackground.src}
+        alt=""
+        class="w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
     <div class="bg-black/60 absolute inset-0" />
 
     <!-- Contenedor centrado con flexbox - Ajustado más abajo -->
